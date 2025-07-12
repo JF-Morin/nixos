@@ -10,7 +10,7 @@ return {
 				null_ls.builtins.formatting.isort,
 				null_ls.builtins.diagnostics.eslint_d,
 				null_ls.builtins.completion.spell,
-				vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {}),
+				vim.keymap.set("n", "<leader>=f", vim.lsp.buf.format, {}),
 			},
 		})
 	end,

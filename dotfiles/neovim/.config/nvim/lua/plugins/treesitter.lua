@@ -1,9 +1,11 @@
 return {
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    branch = "master",
     build = ':TSUpdate',
     config = function()
-        local config = require('nvim-treesitter.configs')
-        config.setup({
+        require("nvim-treesitter.install").compilers = {'gcc'},
+        require'nvim-treesitter.configs'.setup {
             ensure_installed = {
                 'bash',
                 'c',
@@ -20,15 +22,20 @@ return {
                 'javascript',
                 'json',
                 'lua',
+                'markdown',
                 'markdown_inline',
                 'nix',
+                'norg',
                 'python',
                 'regex',
                 'rust',
                 'scss',
                 'sql',
                 'svelte',
+                'tsx',
+                'typst',
                 'typescript',
+                'vue',
                 'xml',
                 'yaml',
                 'zig'
@@ -36,6 +43,6 @@ return {
             auto_install = true,
             highlight = { enable = true },
             indent = { enable = true },
-        })
+        }
     end
 }

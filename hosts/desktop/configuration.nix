@@ -177,6 +177,32 @@ hardware.spacenavd.enable = true;
                 git
                 nodejs_20
                 bun
+                gcc # Required for treesitter?
+                gnumake # Required for treesitter?
+# LSPs
+            bash-language-server
+            ccls
+            csharp-ls
+            docker-language-server
+            emmet-language-server
+            gopls
+            htmx-lsp2
+            lemminx
+            lua-language-server
+            marksman
+            nil
+            nixd
+            nodePackages.vscode-json-languageserver
+            sqls
+            svelte-language-server
+            tailwindcss-language-server
+            typescript-language-server
+            vscode-extensions.rust-lang.rust-analyzer
+            yaml-language-server
+            zls
+# Formatter
+            nixfmt
+
 
 # Networking
                 tailscale # VPN service
