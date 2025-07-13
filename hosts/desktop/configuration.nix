@@ -9,6 +9,7 @@
         [ # Include the results of the hardware scan.
             ./hardware-configuration.nix
             ../../users/jf.nix
+            ../../modules/system
         ];
 
     # Bootloader.
@@ -30,22 +31,22 @@
 
     # Set your time zone.
     #time.timeZone = "Eforestknight my setupurope/Paris";
-    services.automatic-timezoned.enable = true;
+    #services.automatic-timezoned.enable = true;
 
     # Select internationalisation properties.
-    i18n.defaultLocale = systemSettings.locale;
+    #i18n.defaultLocale = systemSettings.locale;
 
-    i18n.extraLocaleSettings = {
-        LC_ADDRESS = "fr_FR.UTF-8";
-        LC_IDENTIFICATION = "fr_FR.UTF-8";
-        LC_MEASUREMENT = "fr_FR.UTF-8";
-        LC_MONETARY = "fr_FR.UTF-8";
-        LC_NAME = "fr_FR.UTF-8";
-        LC_NUMERIC = "fr_FR.UTF-8";
-        LC_PAPER = "fr_FR.UTF-8";
-        LC_TELEPHONE = "fr_FR.UTF-8";
-        LC_TIME = "fr_FR.UTF-8";
-    };
+    #i18n.extraLocaleSettings = {
+    #    LC_ADDRESS = "fr_FR.UTF-8";
+    #    LC_IDENTIFICATION = "fr_FR.UTF-8";
+    #    LC_MEASUREMENT = "fr_FR.UTF-8";
+    #    LC_MONETARY = "fr_FR.UTF-8";
+    #    LC_NAME = "fr_FR.UTF-8";
+    #    LC_NUMERIC = "fr_FR.UTF-8";
+    #    LC_PAPER = "fr_FR.UTF-8";
+    #    LC_TELEPHONE = "fr_FR.UTF-8";
+    #    LC_TIME = "fr_FR.UTF-8";
+    #};
 
     # Enable the SDDM Display Manager
     services.displayManager.sddm.enable = true;
@@ -62,23 +63,16 @@
     services.printing.enable = true;
 
     # Enable sound with pipewire.
-    services.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        jack.enable = true;
+    #services.pulseaudio.enable = false;
+    #security.rtkit.enable = true;
+    #services.pipewire = {
+    #    enable = true;
+    #    alsa.enable = true;
+    #    alsa.support32Bit = true;
+    #    pulse.enable = true;
+    #    jack.enable = true; # If you want to use JACK applications, uncomment this
+    #};
 
-        # use the example session manager (no others are packaged yet so this is enabled by default,
-        # no need to redefine it in your config for now)
-        #media-session.enable = true;
-    };
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
 
     # GPU Driver and OpenGL
     hardware.graphics = {
@@ -122,154 +116,12 @@
     # Space mouse
     hardware.spacenavd.enable = true;
 
-    # Default shell
-    programs.zsh.enable = true;
-    users.defaultUserShell = pkgs.zsh;
-
-    # Define a user account. Don't forget to set a password with ‘passwd’.
-    #users.users.jf = {
-    #    isNormalUser = true;
-    #    description = "JF";
-    #    extraGroups = [ "networkmanager" "wheel" ];
-    #    shell = pkgs.zsh;
-    #};
-
-    # Install firefox.
-    programs.firefox.enable = true;
-
     # Allow unfree packages
     #nixpkgs.config.allowUnfree = true;
 
     # List packages installed in system profile. To search, run: $ nix search wget
     environment.systemPackages = with pkgs; [
-        # Applications
-        freecad-wayland
-        obsidian
-        vlc
-        gimp-with-plugins
-        inkscape-with-extensions
-        brave
-        discord
-        spotify
-        steam
-        libreoffice
-        kicad
-        whatsapp-for-linux
-        firefox
-
-        # Terminal
-        yazi # Terminal file eplorer
-        oh-my-posh # Command line graphic
-        lazygit # Git TUI
-        #nerdfonts   # Fonts
-        font-awesome # Fonts
-        ghostty # Terminal
-        tmux # Terminal multiplexer
-        bat # Like cat, but better
-        stow # Link manager
-        zsh # Shell
-        fastfetch # System info
-        zoxide # Smart 'cd' replacement
-        eza # Better LS command and Tree command
-        ripgrep-all # Ripgrep, with PDF, doc, zip etc
-
-        # Development
-        neovim
-        vscodium
-        docker
-        gh #github
-        python312
-        rustc
-        cargo
-        go
-        zig
-        git
-        nodejs_20
-        bun
-        gcc # Required for treesitter?
-        gnumake # Required for treesitter?
-        # LSPs
-        bash-language-server
-        ccls
-        csharp-ls
-        docker-language-server
-        emmet-language-server
-        gopls
-        htmx-lsp2
-        lemminx
-        lua-language-server
-        marksman
-        nil
-        nixd
-        nodePackages.vscode-json-languageserver
-        sqls
-        svelte-language-server
-        tailwindcss-language-server
-        typescript-language-server
-        vscode-extensions.rust-lang.rust-analyzer
-        yaml-language-server
-        zls
-        # Formatter
-        nixfmt-classic
-
-
-        # Networking
-        tailscale # VPN service
-        nmap # Network mapping
-
-        # Tools
-        flatpak
-        fzf #fuzzy finder
-        unzip
-        gzip
-        ffmpeg # Image/Video compression, convertion, etc
-        htop # Interactive process viewer
-        wget
-        curl
-
-        # Tools for Fusion360
-        wine-wayland
-        winetricks
-        coreutils
-        gawk
-        lsb-release
-        cabextract
-        mesa
-        mesa-demos
-        polkit
-        p7zip
-        samba
-        spacenavd
-        bc
-        mokutil
-        xorg.xrandr
-        virtualglLib
-        gettext
-
-        # Hyprland
-        #ags # Widgets and bar
-        #astal.io
-        dunst # Notifications
-        libnotify # for notifications
-        rofi-wayland # app launcher
-        waybar # status bar
-        wl-clipboard # Clipboard
-        hyprlock # Lock screen
-        hyprshot # Screenshots
-        nautilus # File explorer => test vs thunar
-        wlogout
-        #thunar # test vs dolphin
-        #xfce.tumbler # for thunar thumbnails
-        #ffmpegthumbnailer #video thumbnail
     ];
-
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # programs.mtr.enable = true;
-    # programs.gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
 
     services.samba.enable = true;
     # Hyprland

@@ -84,16 +84,26 @@
                 desktop = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     modules = [
-                        ./home-manager/desktop.home.nix
+                        ./home/desktop.home.nix
                     ];
+                    extraSpecialArgs = {
+                        inherit pkgs;
+                        inherit systemSettings;
+                        inherit userSettings;
+                    };
                 };
 
                 # --- Laptop Home-Manager --- #
                 laptop = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     modules = [
-                        ./home-manager/laptop.home.nix
+                        ./home/laptop.home.nix
                     ];
+                    extraSpecialArgs = {
+                        inherit pkgs;
+                        inherit systemSettings;
+                        inherit userSettings;
+                    };
                 };
             };
 
