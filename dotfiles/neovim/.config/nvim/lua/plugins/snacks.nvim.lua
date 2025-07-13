@@ -1,6 +1,5 @@
 return {
     "folke/snacks.nvim",
-    ---@type snacks.Config
     priority = 1000,
     keys = {
         -- Top
@@ -41,7 +40,7 @@ return {
     },
 
     opts = {
-        dashboard = { enabled = true},
+        dashboard = { enabled = true },
         lazygit = {
             -- your lazygit configuration comes here
             -- or leave it empty to use the default settings
