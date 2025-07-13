@@ -6,6 +6,9 @@
 
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+    imports = [
+        ../modules/dev
+    ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -43,13 +46,13 @@
         neovim
         vscodium
         docker
-        gh #github
+        #gh #github
         python312
         rustc
         cargo
         go
         zig
-        git
+        #git
         nodejs_20
         bun
         gcc # Required for treesitter?
