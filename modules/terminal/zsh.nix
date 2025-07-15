@@ -3,8 +3,11 @@
 {
     programs.zsh = {
         enable = true;
-        histSize = 1000;
-        promptInit = ''
+        autosuggestion.enable = true;
+        history = {
+            size = 1000;
+        };
+        initContent = ''
             fastfetch
             eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/jf_morin.omp.json)"
             eval "$(zoxide init zsh)"
