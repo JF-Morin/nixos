@@ -8,6 +8,7 @@
 
     imports = [
         ../modules/dev
+        ../modules/terminal
     ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -36,7 +37,7 @@
         tmux # Terminal multiplexer
         bat # Like cat, but better
         stow # Link manager
-        zsh # Shell
+        #zsh # Shell
         fastfetch # System info
         zoxide # Smart 'cd' replacement
         eza # Better LS command and Tree command
