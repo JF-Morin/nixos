@@ -9,6 +9,7 @@
     imports = [
         ../modules/dev
         ../modules/terminal
+        ../modules/wm
     ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -96,6 +97,7 @@
         htop # Interactive process viewer
         wget
         curl
+        imagemagick
 
         # Tools for Fusion360
         #wine-wayland
@@ -124,7 +126,7 @@
         rofi-wayland # app launcher
         waybar # status bar
         wl-clipboard # Clipboard
-        hyprlock # Lock screen
+        #hyprlock # Lock screen
         hyprshot # Screenshots
         nautilus # File explorer => test vs thunar
         wlogout

@@ -9,7 +9,7 @@
         [ # Include the results of the hardware scan.
             ./hardware-configuration.nix
             ../../users/jf.nix
-            ../../modules/system
+            ../../modules/core
         ];
 
     # Bootloader.
@@ -34,7 +34,7 @@
     #services.displayManager.sddm.theme = "";
 
     # Enable Hyprlock
-    security.pam.services.hyprlock = {};
+    #security.pam.services.hyprlock = {};
 
     # Flatpak
     services.flatpak.enable = true;
