@@ -2,9 +2,19 @@
     description = "JF's flake";
 
     inputs = {
+
+        # Nixpkgs
         nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
+
+        # Home-manager
         home-manager = {
             url = "github:nix-community/home-manager/release-25.05";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # Astal
+        astal = {
+            url = "github:aylur/astal";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
@@ -90,6 +100,7 @@
                         inherit pkgs;
                         inherit systemSettings;
                         inherit userSettings;
+                        inherit inputs;
                     };
                 };
 
@@ -103,6 +114,7 @@
                         inherit pkgs;
                         inherit systemSettings;
                         inherit userSettings;
+                        inherit inputs;
                     };
                 };
             };

@@ -18,9 +18,9 @@
             hmsf = "home-manager switch --flake";
 
             # LS & tree
-            ls = "eza";
-            ll = "eza -la";
-            tree = "eza --tree";
+            ls = "eza --icons=auto";
+            ll = "eza -la --icons=auto";
+            tree = "eza --tree --icons=auto";
         };
     };
 }

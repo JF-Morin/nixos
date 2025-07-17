@@ -1,4 +1,4 @@
-{ config, pkgs, userSettings, systemSettings, ... }:
+{ inputs, config, pkgs, userSettings, systemSettings, ... }:
 
 {
   home.username = userSettings.username;
@@ -94,7 +94,7 @@
         unzip
         gzip
         ffmpeg # Image/Video compression, convertion, etc
-        htop # Interactive process viewer
+        btop # Interactive process viewer
         wget
         curl
         imagemagick
@@ -120,8 +120,8 @@
 
         # Hyprland
         #ags # Widgets and bar
-        #astal.io
         dunst # Notifications
+        inputs.astal.packages.${systemSettings.system}.default
         libnotify # for notifications
         rofi-wayland # app launcher
         waybar # status bar
