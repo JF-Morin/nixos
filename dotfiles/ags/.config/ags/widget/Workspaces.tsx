@@ -14,25 +14,37 @@ export default function Workspaces() {
         return workspaces
     }
 
-    const [workspaces, setWorkspaces] = createState(getSortedWorkspaces())
+    let getActiveWorkspace = function (){
+        //return hyprland.get_workspace()
+    }
 
-    hyprland.connect('workspace-added', () => {
-        let ws = getSortedWorkspaces()
-        setWorkspaces(ws)
-    })
-    hyprland.connect('workspace-removed', () => { 
-        let ws = getSortedWorkspaces()
-        setWorkspaces(ws)
-    })
+    const [workspaces, setWorkspaces] = createState(getSortedWorkspaces())
+    const [activeWorkspaceId, setActiveWorkspaceId] = createState(999)
+
+
+
+    hyprland.connect('event', (service, eventName, data) => {
+        //print(`Received Hyprland event: ${eventName}, with data: ${data}`);
+
+        if(eventName == "workspacev2"){
+            setWorkspaces(getSortedWorkspaces())
+            setActiveWorkspaceId(data[0])
+        }
+    });
+    
+    const activeWsId = activeWorkspaceId((id)=>id.toString() )
 
 
     return (
         <box class="bar-widget" orientation={Gtk.Orientation.HORIZONTAL}>
             <For each={workspaces}>
                 {(item, index: Accessor<number>) => (
-                <label class="workspace-button" label={item.name} />
+                    <button class='workspace-active'>
+                        <label halign={Gtk.Align.Center} label={item.id.toString()}/>
+                    </button>
                 )}
             </For>
+            <label label={activeWsId}/>
         </box>
     )
 }

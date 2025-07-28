@@ -9,7 +9,7 @@ export default function Logout() {
 
     return (
         <button name="power-button" class="bar-widget" onClicked={wlogout}>
-            <label label=""/>
+            <label label=" "/>
         </button>
     )
 }

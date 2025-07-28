@@ -1,11 +1,21 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #444444;
 
+*{
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  line-height: 0px;
+  font-size: 1em;
+  min-height: 0px;
+  min-width: 0px;
+}
+
 window.Bar {
   background: transparent;
   color: $fg-color;
   font-weight: bold;
-  font-family: "JetBrains Mono";
+  font-family: "JetBrains Propo";
   font-size: 1em;
   padding-top: 4px;
 }
@@ -30,13 +40,29 @@ window.Bar {
   margin-right: 8px;
 }
 
-.workspace-button {
-  background: lime;
-  margin: 4px;
+.workspace-indicator {
+  background: grey;
+  //font-size: 0em;
+  margin: 6px;
+  min-width: 8px;
+  min-height: 8px;
   border-radius: 9999px;
-  min-width: 30px;
+}
+
+.workspace-active {
+  background: white;
+  //font-size: 0em;
+  margin: 6px;
+  min-width: 24px;
+  min-height: 8px;
+  border-radius: 9999px;
+}
+
+#nixos-button{
+  padding-right: 6px;
 }
 
 #power-button{
   color: salmon;
+  padding-right: 2px;
 }

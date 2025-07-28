@@ -69,7 +69,7 @@
         docker-language-server
         emmet-language-server
         gopls
-        htmx-lsp2
+        htmx-lsp
         lemminx
         lua-language-server
         marksman
