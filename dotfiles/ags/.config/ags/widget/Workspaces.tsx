@@ -1,50 +1,62 @@
-import { Astal, Gtk, Gdk } from "ags/gtk4"
+import { Astal, Gtk, Gdk} from "ags/gtk4"
 import { For, Accessor, createState } from "ags"
 import Hyprland from "gi://AstalHyprland"
 
 export default function Workspaces() {
+    // Get hyprland
     const hyprland = Hyprland.get_default()
 
-    let getSortedWorkspaces = function () {
-        let workspaces = hyprland.get_workspaces().sort ((a,b) => {
-            if(a.id < b.id) return -1 
-            if(a.id > b.id) return 1  
-            return 0
+    // Updates the list of Widgets
+    let updateWorkspaces = function(activeId: number) {
+        let workspaces = new Array()
+        let currentWsAdded = false
+        const orderedWorkspaces = hyprland.get_workspaces().sort((a,b) => a.id - b.id)
+
+        // Loop through every Workspace
+        orderedWorkspaces.forEach( ws =>{
+            let item: any
+
+            // Label for the current Workspace
+            if(ws.id == activeId && !currentWsAdded) {
+                item = (
+                    <label class='workspace-indicator'/>
+                )
+                currentWsAdded = true
+            }
+            // Button for other workspaces (navigation)
+            else {
+                item = (
+                    <button class='workspace-active'>
+                        <label halign={Gtk.Align.CENTER}/>
+                    </button>
+                )
+            }
+
+            // Add to list to return
+            workspaces.push(item)
         })
         return workspaces
     }
-
-    let getActiveWorkspace = function (){
-        //return hyprland.get_workspace()
-    }
-
-    const [workspaces, setWorkspaces] = createState(getSortedWorkspaces())
-    const [activeWorkspaceId, setActiveWorkspaceId] = createState(999)
-
-
+    
+    const [workspaces, setWorkspaces] = createState(updateWorkspaces(0))
 
     hyprland.connect('event', (service, eventName, data) => {
         //print(`Received Hyprland event: ${eventName}, with data: ${data}`);
 
+        // In case of new workspace
         if(eventName == "workspacev2"){
-            setWorkspaces(getSortedWorkspaces())
-            setActiveWorkspaceId(data[0])
+            setWorkspaces(updateWorkspaces(data[0]))
         }
     });
-    
-    const activeWsId = activeWorkspaceId((id)=>id.toString() )
 
-
+    // Widget to return
     return (
         <box class="bar-widget" orientation={Gtk.Orientation.HORIZONTAL}>
             <For each={workspaces}>
                 {(item, index: Accessor<number>) => (
-                    <button class='workspace-active'>
-                        <label halign={Gtk.Align.Center} label={item.id.toString()}/>
-                    </button>
+                    item
                 )}
             </For>
-            <label label={activeWsId}/>
         </box>
     )
 }
