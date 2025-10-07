@@ -1,0 +1,97 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0,0,0,0);
+    color: white;
+}
+
+button {
+    background: red;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#workspaces {
+    background: #262C36;
+    border-radius: 999px;
+    color: red;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    margin: 4px 3px;
+    border-radius: 999px;
+    border: 0px; 
+    background: blue;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background: cyan;
+    min-width: 40px;
+}
+
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock {
+    background-color: #64727D;
+}
+
+#battery {
+    background-color: #ffffff;
+    color: black;
+}
+
+#battery.charging {
+    color: white;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#power {
+    color: red;
+}
+
+#nixos span {
+    background: red;
+    color: blue;
+    border-radius: 999px;
+    padding: 8px 4px; 
+    margin: 8px 4px;
+}
