@@ -30,6 +30,7 @@
         kicad
         whatsapp-for-linux
         firefox
+        blender
 
         # Terminal
         yazi # Terminal file eplorer
@@ -52,7 +53,8 @@
         vscodium
         docker
         #gh #github
-        python312
+        python314
+        python313Packages.pip        
         rustc
         cargo
         go
