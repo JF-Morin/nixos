@@ -1,5 +1,5 @@
 import { Astal, Gtk, Gdk } from "ags/gtk4"
-import { For, Accessor, createState } from "ags"
+import { With, For, Accessor, createState } from "ags"
 import Hyprland from "gi://AstalHyprland"
 
 export default function Workspaces() {
@@ -19,32 +19,31 @@ export default function Workspaces() {
     }
 
     const [workspaces, setWorkspaces] = createState(getSortedWorkspaces())
-    const [activeWorkspaceId, setActiveWorkspaceId] = createState(999)
+    const [activeWorkspaceId, setActiveWorkspaceId] = createState(0)
 
 
 
     hyprland.connect('event', (service, eventName, data) => {
-        //print(`Received Hyprland event: ${eventName}, with data: ${data}`);
 
         if(eventName == "workspacev2"){
             setWorkspaces(getSortedWorkspaces())
-            setActiveWorkspaceId(data[0])
+            setActiveWorkspaceId(Number(data[0]))
+            //print(`Received Hyprland event: ${eventName}, with data: ${data[0]}`);
+            let test = activeWorkspaceId(value => value)
+            print(typeof test)
         }
     });
-    
-    const activeWsId = activeWorkspaceId((id)=>id.toString() )
 
 
     return (
         <box class="bar-widget" orientation={Gtk.Orientation.HORIZONTAL}>
             <For each={workspaces}>
                 {(item, index: Accessor<number>) => (
-                    <button class='workspace-active'>
-                        <label halign={Gtk.Align.Center} label={item.id.toString()}/>
-                    </button>
+                        <button class="workspace-indicator">
+                            <label halign={Gtk.Align.Center} label={typeof (activeWorkspaceId(value => value))}/>
+                        </button>
                 )}
             </For>
-            <label label={activeWsId}/>
         </box>
     )
 }
