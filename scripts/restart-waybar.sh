@@ -1,10 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Restart waybar
 #
 
-# Kill Waybar
-pkill waybar
-
-# Start Waybar
-waybar &
+# Kill Waybar and restart it
+pkill waybar; waybar &

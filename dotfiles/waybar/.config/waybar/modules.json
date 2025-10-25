@@ -5,11 +5,18 @@
         "all-outputs": true,
         "on-click": "activate",
         "warp-on-scroll": false,
-        "format": "{}",
+        "format": "",
         "format-icons": {
             "urgent": "",
             "focused": "",
             "default": ""
+        },
+        "persistent-workspaces": {
+            "1":[],
+            "2":[],
+            "3":[],
+            "4":[],
+            "5":[],
         }
     },
     "keyboard-state": {

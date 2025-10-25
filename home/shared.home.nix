@@ -64,6 +64,7 @@
         bun
         gcc # Required for treesitter?
         gnumake # Required for treesitter?
+
         # LSPs
         bash-language-server
         ccls
@@ -92,6 +93,7 @@
         # Networking
         tailscale # VPN service
         nmap # Network mapping
+        protonvpn-gui # Proton VPN
 
         # Tools
         flatpak
@@ -135,6 +137,7 @@
         hyprshot # Screenshots
         nautilus # File explorer => test vs thunar
         wlogout
+        pavucontrol
         #thunar # test vs dolphin
         #xfce.tumbler # for thunar thumbnails
         #ffmpegthumbnailer #video thumbnail

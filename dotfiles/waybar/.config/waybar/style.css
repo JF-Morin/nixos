@@ -1,8 +1,9 @@
 * {
     border: none;
     border-radius: 0;
+    padding: 0;
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     min-height: 0;
 }
 
@@ -27,20 +28,22 @@ tooltip label {
     background: #262C36;
     border-radius: 999px;
     color: red;
+    margin: 4px;
 }
 
 #workspaces button {
     padding: 0 5px;
-    margin: 4px 3px;
+    margin: 8px 4px;
     border-radius: 999px;
     border: 0px; 
-    background: blue;
+    background: white;
+    font-size: 1px;
     color: white;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 #workspaces button.active {
-    background: cyan;
+    background: #4F73BD;
     min-width: 40px;
 }
 
@@ -86,6 +89,7 @@ tooltip label {
 
 #power {
     color: red;
+    margin: 10px;
 }
 
 #nixos span {
