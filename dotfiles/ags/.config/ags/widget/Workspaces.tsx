@@ -41,7 +41,6 @@ export default function Workspaces() {
     const [workspaces, setWorkspaces] = createState(updateWorkspaces(0))
 
     hyprland.connect('event', (service, eventName, data) => {
-        //print(`Received Hyprland event: ${eventName}, with data: ${data}`);
 
         // In case of new workspace
         if(eventName == "workspacev2"){
