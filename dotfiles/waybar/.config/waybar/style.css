@@ -1,19 +1,18 @@
 * {
     border: none;
     border-radius: 0;
+    margin: 0px;
     padding: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: "JetBrains Mono Nerd Font", sans-serif;
     font-size: 12px;
     min-height: 0;
+    box-shadow: none;
+    text-shadow: none;
 }
 
 window#waybar {
     background: rgba(0,0,0,0);
     color: white;
-}
-
-button {
-    background: red;
 }
 
 tooltip {
@@ -24,31 +23,38 @@ tooltip label {
   color: white;
 }
 
-#workspaces {
+.module {
     background: #262C36;
-    border-radius: 999px;
-    color: red;
+    border-radius: 999;
     margin: 4px;
+    padding: 4px 8px;
+}
+
+#workspaces {
+    padding: 0px 8px; 
 }
 
 #workspaces button {
-    padding: 0 5px;
-    margin: 8px 4px;
     border-radius: 999px;
-    border: 0px; 
-    background: white;
-    font-size: 1px;
+    font-size: 120%;
     color: white;
+    margin: 4px;
     transition: all 0.1s ease-in-out;
+}
+
+#workspaces button:hover{
+    background: transparent;
 }
 
 #workspaces button.active {
     background: #4F73BD;
+    color: #4F73BD;
     min-width: 40px;
+    margin: 6px 4px;
 }
 
 #mode, #clock, #battery {
-    padding: 0 10px;
+    padding: 0 1px;
 }
 
 #mode {
@@ -57,7 +63,6 @@ tooltip label {
 }
 
 #clock {
-    background-color: #64727D;
 }
 
 #battery {
@@ -87,15 +92,14 @@ tooltip label {
     animation-direction: alternate;
 }
 
-#power {
-    color: red;
-    margin: 10px;
+#custom-power {
+    color: white;
+    background-color: salmon;
+    padding-left: 12px;
 }
 
-#nixos span {
-    background: red;
-    color: blue;
-    border-radius: 999px;
-    padding: 8px 4px; 
-    margin: 8px 4px;
+#custom-nixos {
+    color: #77B6E1;
+    min-width: 20px;
+    padding-right: 10px;
 }

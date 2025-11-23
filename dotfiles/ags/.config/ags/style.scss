@@ -58,16 +58,13 @@ window.Bar {
   border-radius: 9999px;
 }
 
-.test{
-  background: red;
-  font-size: 1rem;
-}
 
-#nixos-button{
+.custom-nixos-button {
   padding-right: 6px;
 }
 
-#power-button{
+.custom-power {
   color: salmon;
-  padding-right: 2px;
+  background-color: red;
+  padding-right: 100px;
 }

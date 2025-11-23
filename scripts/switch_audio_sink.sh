@@ -1,112 +1,85 @@
 #!/usr/bin/env bash
-# Script: get_wpctl_sinks_raw.sh
-# Description: Executes 'wpctl status -k' and extracts only the raw lines 
-#              listing the audio sinks, excluding the header and footer lines.
 
-# --- Configuration ---
-WPCTL_CMD="wpctl"
-WPCTL_ARGS="status -k"
-# --- End Configuration ---
+# --- Function to extract and process the Sink IDs ---
+get_next_sink_id() {
+    # 1. Get the raw output
+    STATUS_OUTPUT=$(wpctl status -k)
 
-# Function to display an error message and exit
-#function error_exit() {
-#    echo -e "\033[0;31mERROR:\033[0m $1" >&2
-#    exit 1
-#}
-#
-## Check if wpctl is installed
-#if ! command -v $WPCTL_CMD &> /dev/null; then
-#    error_exit "$WPCTL_CMD could not be found. Please ensure PipeWire is installed."
-#fi
-#
-#echo "--- Filtered Audio Sinks ---"
-#echo "--- Def | ID | Nickname | Volume ---"
-#
-## Use awk to select the line range (between Sinks and Sources), 
-## filter out non-device lines, and then extract the required fields (ID, Nickname, Volume) 
-## for formatted output.
-#
-#$WPCTL_CMD $WPCTL_ARGS | awk '
-## Set a flag when we enter the Sinks block
-#/├─ Sinks:/ { in_sinks = 1; next }
-#
-## Unset the flag when we leave the Sinks block
-#/├─ Sources:/ { in_sinks = 0; next }
-#
-## Only process lines within the Sinks block that contain a device ID
-#in_sinks && $0 ~ /[0-9]+\./ {
-#    
-#    # 0. Determine Default Status
-#    # Check if the line contains an asterisk; set is_default to "*" or a space
-#    is_default = " ";
-#    if ($0 ~ /\*/) {
-#        is_default = "*";
-#    }
-#    
-#    # 1. Extract ID: find the number and remove the trailing dot
-#    match($0, /[0-9]+\./);
-#    id = substr($0, RSTART, RLENGTH - 1);
-#
-#    # 2. Extract Volume: find the text inside [vol: ...]
-#    match($0, /\[vol: [^\]]+\]/);
-#    volume = substr($0, RSTART, RLENGTH);
-#
-#    # 3. Extract Nickname: everything between the ID and the Volume.
-#    
-#    # Find the position where the ID ends (including the dot)
-#    id_end_pos = index($0, id ".");
-#    
-#    # Find the position where the volume starts
-#    vol_start_pos = index($0, volume);
-#    
-#    # Start: 2 characters after the ID dot (to skip the dot and the following space)
-#    nickname_start = id_end_pos + length(id) + 2;
-#    # Length: calculated from vol_start minus the nickname start position
-#    nickname_len = vol_start_pos - nickname_start;
-#    
-#    # Extract the raw nickname text
-#    nickname_raw = substr($0, nickname_start, nickname_len);
-#    
-#    # Trim leading/trailing whitespace from the nickname
-#    gsub(/^[[:space:]]+|[[:space:]]+$/, "", nickname_raw);
-#
-#    # 4. Print the result with the new Default column
-#    printf "%s | %s | %s | %s\n", is_default, id, nickname_raw, volume;
-#}
-#'
-#
-#echo "--- End of Filtered Sinks ---"#
+    # 2. Extract the list of all Sink IDs
+    #    - Start search after "Sinks:"
+    #    - Stop search when a line starts with "├─" or "└─" that is NOT part of "Sinks:"
+    #    - Extract only the digits (the ID) using a regex match.
+    ALL_IDS=$(echo "$STATUS_OUTPUT" | \
+              awk '/Sinks:/ {p=1; next} 
+                   /^[[:space:]]*(├─|└─)/ {p=0} 
+                   p==1 && /^[[:space:]]*│[[:space:]]*(\*)?[[:space:]]*[0-9]+/ {
+                       # Match and print the first sequence of digits (the ID)
+                       match($0, /[0-9]+/, id_arr);
+                       print id_arr[0];
+                   }' | \
+              sort -n)
 
-# --- 2. Extract ID of the First Non-Default Sink into a variable ---
+    # 3. Find the ID of the currently selected Sink (the one with '*')
+    # **ADJUSTED COMMAND**
+    CURRENT_ID=$(echo "$STATUS_OUTPUT" | \
+                 awk '/Sinks:/ {p=1; next} 
+                      p==1 && /\*/ {
+                          # Match and print the first sequence of digits (the ID)
+                          match($0, /[0-9]+/, id_arr);
+                          print id_arr[0];
+                          exit;
+                      }')
 
-# Use awk to find the ID of the first sink that is not marked as default.
-# The result is captured using command substitution $().
-FIRST_NON_DEFAULT_SINK_ID=$($WPCTL_CMD $WPCTL_ARGS | awk '
-# Set a flag when we enter the Sinks block
-/├─ Sinks:/ { in_sinks = 1; next }
+    # --- Validation ---
+    if [[ -z "$ALL_IDS" || -z "$CURRENT_ID" ]]; then
+        echo "Error: Could not retrieve Sink IDs or the current active Sink ID." >&2
+        return 1
+    fi
 
-# Unset the flag when we leave the Sinks block
-/├─ Sources:/ { in_sinks = 0; next }
+    # --- Looping Logic ---
+    # Convert the list of IDs into a Bash array
+    ID_ARRAY=($ALL_IDS)
+    # Get the total number of IDs
+    NUM_IDS=${#ID_ARRAY[@]}
 
-# Only process lines within the Sinks block that contain a device ID
-in_sinks && $0 ~ /[0-9]+\./ {
-    
-    # Check if the line does NOT contain the asterisk (*)
-    if ($0 !~ /\*/) {
-        
-        # 1. Extract ID: find the number and remove the trailing dot
-        match($0, /[0-9]+\./);
-        id = substr($0, RSTART, RLENGTH - 1);
-        
-        # Print the ID and immediately stop processing
-        print id;
-        exit; # Exit awk immediately after finding the first non-default ID
-    }
+    # Find the index of the current ID in the array
+    CURRENT_INDEX=-1
+    for i in "${!ID_ARRAY[@]}"; do
+        if [[ "${ID_ARRAY[$i]}" == "$CURRENT_ID" ]]; then
+            CURRENT_INDEX=$i
+            break
+        fi
+    done
+
+    if [[ "$CURRENT_INDEX" -eq -1 ]]; then
+        echo "Error: Current ID '$CURRENT_ID' not found in the list of available IDs." >&2
+        return 1
+    fi
+
+    # Calculate the index of the next ID, using modulo to loop back to 0
+    NEXT_INDEX=$(((CURRENT_INDEX + 1) % NUM_IDS))
+
+    # The Next ID is the value at the calculated index
+    NEXT_ID=${ID_ARRAY[$NEXT_INDEX]}
+
+    # Output the results
+    #echo "Current Sink ID (*): $CURRENT_ID"
+    #echo "Next Sink ID (Looping): $NEXT_ID"
+    #echo ""
+    #echo "$NEXT_ID" # Print the ID alone for script chaining/use
+    echo $NEXT_ID
 }
-')
 
-# Set the new output volume ID
+# --- Main execution ---
+# Store the next ID and display the status
+RESULT=$(get_next_sink_id)
+echo "$RESULT"
+wpctl set-default $RESULT
 
-wpctl set-default $FIRST_NON_DEFAULT_SINK_ID
-
-exit 0
+if [[ $? -eq 0 ]]; then
+    NEXT_SINK_ID=$(echo "$RESULT" | tail -n 1) # Get the last line (the ID)
+    
+    # Optional: Uncomment the lines below to automatically switch the sink
+    # echo "Switching default sink to ID $NEXT_SINK_ID..."
+    # wpctl set-default $NEXT_SINK_ID
+fi

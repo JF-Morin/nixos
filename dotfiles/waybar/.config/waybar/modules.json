@@ -5,7 +5,7 @@
         "all-outputs": true,
         "on-click": "activate",
         "warp-on-scroll": false,
-        "format": "",
+        "format": "\uf444",
         "format-icons": {
             "urgent": "",
             "focused": "",
@@ -179,7 +179,7 @@
         "on-click": "wlogout",
     },
     "custom/nixos": {
-        "format": "<span>\uf313</span>"
+        "format": "\uf313"
     }
 }
 
