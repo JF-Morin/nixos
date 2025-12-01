@@ -3,7 +3,7 @@
     border-radius: 0;
     margin: 0px;
     padding: 0;
-    font-family: "JetBrains Mono Nerd Font", sans-serif;
+    font-family: "JetBrains Mono Nerd Font Propo", sans-serif;
     font-size: 12px;
     min-height: 0;
     box-shadow: none;
@@ -27,8 +27,9 @@ tooltip label {
     background: #262C36;
     border-radius: 999;
     margin: 4px;
-    padding: 4px 8px;
+    padding: 4px 12px;
 }
+
 
 #workspaces {
     padding: 0px 8px; 
@@ -36,7 +37,6 @@ tooltip label {
 
 #workspaces button {
     border-radius: 999px;
-    font-size: 120%;
     color: white;
     margin: 4px;
     transition: all 0.1s ease-in-out;
@@ -49,20 +49,19 @@ tooltip label {
 #workspaces button.active {
     background: #4F73BD;
     color: #4F73BD;
-    min-width: 40px;
+    min-width: 30px;
     margin: 6px 4px;
 }
 
-#mode, #clock, #battery {
-    padding: 0 1px;
-}
 
 #mode {
     background: #64727D;
     border-bottom: 3px solid white;
 }
 
-#clock {
+.clock {
+    padding: 4px 8px;
+
 }
 
 #battery {
@@ -96,10 +95,14 @@ tooltip label {
     color: white;
     background-color: salmon;
     padding-left: 12px;
+    margin-right: 8px;
+    transition: all 0.3s ease-in-out;
+}
+#custom-power:hover{
+    background-color: #FF5454;
 }
 
 #custom-nixos {
     color: #77B6E1;
     min-width: 20px;
-    padding-right: 10px;
 }
