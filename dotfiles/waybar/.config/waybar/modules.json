@@ -138,9 +138,9 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{icon}",
+        "format-wifi": "{icon} {essid}",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{essid} ({signalStrength}%)",
+        "tooltip-format": "{ipaddr} ({signalStrength}%)",
         //"tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
