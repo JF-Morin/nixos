@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     margin: 0px;
-    padding: 0;
+    padding: 0px;
     font-family: "JetBrains Mono Nerd Font Propo", sans-serif;
     font-size: 12px;
     min-height: 0;
@@ -24,10 +24,14 @@ tooltip label {
 }
 
 .module {
-    background: #262C36;
-    border-radius: 999;
-    margin: 4px;
-    padding: 4px 12px;
+    margin: 0px 8px; 
+}
+
+.modules-center{
+    background: #222;
+    border-radius: 999px;
+    margin: 4px 0 0 0;
+    padding: 0px 4px; 
 }
 
 
@@ -65,27 +69,31 @@ tooltip label {
 }
 
 #battery {
-    background-color: #ffffff;
-    color: black;
 }
 
 #battery.charging {
-    color: white;
-    background-color: #26A65B;
+    color: #26A65B;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: black;
+        color: white;
     }
 }
 
 #battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
+    color: #f53c3c;
     animation-name: blink;
-    animation-duration: 0.5s;
+    animation-duration: 1.0s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 1.0s;
     animation-timing-function: steps(12);
     animation-iteration-count: infinite;
     animation-direction: alternate;
@@ -94,7 +102,8 @@ tooltip label {
 #custom-power {
     color: white;
     background-color: salmon;
-    padding-left: 12px;
+    border-radius: 999px;
+    padding: 0px 12px; 
     margin-right: 8px;
     transition: all 0.3s ease-in-out;
 }

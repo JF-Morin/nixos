@@ -7,40 +7,41 @@
     //"height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     //"spacing": 4, // Gaps between modules (4px)
+    "reload_style_on_change": true, 
     "include": ["~/Projects/nixos/dotfiles/waybar/.config/waybar/modules.json"],
 
     // Modules
     "modules-left": [
-        "custom/nixos",
         "hyprland/mode",
         "hyprland/scratchpad",
         "custom/media"
     ],
     "modules-center": [
+        "custom/nixos",
+        "clock",
         "hyprland/workspaces",
+        "pulseaudio",
+        "network",
+        "battery",
+        "backlight",
+        "tray",
     ],
     "modules-right": [
         //"mpd",
         //"idle_inhibitor",
-        "pulseaudio",
-        "network",
         //"power-profiles-daemon",
-        "group/hardware",
-        "backlight",
+        //"group/hardware",
         //"keyboard-state",
         //"hyprland/language",
-        //"battery",
         //"battery#bat2",
-        "clock",
-        "tray",
         "custom/power"
     ],
     "group/hardware":{
         "orientation": "horizontal",
         "modules":[
             "cpu",
-        "memory",
-        "temperature"
+            "memory",
+            "temperature"
         ]
     }
 }

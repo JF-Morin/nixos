@@ -105,6 +105,7 @@
         wget
         curl
         imagemagick
+        webp-pixbuf-loader
 
         # Tools for Fusion360
         #wine-wayland

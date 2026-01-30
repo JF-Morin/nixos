@@ -6,7 +6,8 @@
     ];
     
     # Specific programs for Desktop
-    #home.packages = with pkgs; [
-    #    # Applications
-    #];
+    home.packages = with pkgs; [
+        # Applications
+        brightnessctl
+    ];
 }

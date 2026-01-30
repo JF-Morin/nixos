@@ -83,7 +83,8 @@
         // "timezone": "America/New_York",
         //"format" : "<span class=\"icon\" id=\"clock-icon\">\udb82\udd54</span> {:%H:%M}",
         "interval": 1,
-        "format" : "<span>󰥔</span> {:%F %T}",
+        //"format" : "<span>󰥔</span> {:%F %T}",
+        "format" : "{:%T}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -103,28 +104,42 @@
         "format-icons": ["", "", ""]
     },
     "backlight": {
-        // "device": "acpi_video1",
+        "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
+        //"bat": "BAT",
         "states": {
             // "good": 95,
             "warning": 30,
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-full": "{icon} {capacity}%",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-full": "{icon}{capacity}%",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
         "format-alt": "{icon} {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
+    //"battery#bat2": {
+    //    "bat": "BAT1",
+    //    "states": {
+    //        // "good": 95,
+    //        "warning": 30,
+    //        "critical": 15
+    //    },
+    //    "format": "{icon} {capacity}%",
+    //    "format-full": "{icon} {capacity}%",
+    //    "format-charging": " {capacity}%",
+    //    "format-plugged": " {capacity}%",
+    //    "format-alt": "{icon} {time}",
+    //    // "format-good": "", // An empty format will hide the module
+    //    // "format-full": "",
+    //    "format-icons": ["", "", "", "", ""]
+    //},
     "power-profiles-daemon": {
         "format": "{icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -138,9 +153,9 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{icon} {essid}",
+        "format-wifi": "{icon}",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ipaddr} ({signalStrength}%)",
+        "tooltip-format": "{essid} ({ipaddr}) ({signalStrength}%)",
         //"tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
@@ -149,11 +164,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}% {format_source}",
+        "format": "{icon} {volume}%",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": " {volume}%",
+        //"format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
