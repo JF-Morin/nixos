@@ -25,15 +25,6 @@
         "battery",
         "backlight",
         "tray",
-    ],
-    "modules-right": [
-        //"mpd",
-        //"idle_inhibitor",
-        //"power-profiles-daemon",
-        //"group/hardware",
-        //"keyboard-state",
-        //"hyprland/language",
-        //"battery#bat2",
         "custom/power"
     ],
     "group/hardware":{

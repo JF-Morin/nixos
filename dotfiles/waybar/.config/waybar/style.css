@@ -100,15 +100,12 @@ tooltip label {
 }
 
 #custom-power {
-    color: white;
-    background-color: salmon;
-    border-radius: 999px;
-    padding: 0px 12px; 
-    margin-right: 8px;
+    color: salmon;
     transition: all 0.3s ease-in-out;
+    margin: 0 8px;
 }
 #custom-power:hover{
-    background-color: #FF5454;
+    color: #FF5454;
 }
 
 #custom-nixos {

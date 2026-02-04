@@ -22,6 +22,12 @@
             inputs.nixpkgs.follows = "nixpkgs";
             inputs.astal.follows = "astal";
         };
+
+        # Zen browsers
+        zen-browser = {
+            url = "github:youwen5/zen-browser-flake";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = { self, nixpkgs, home-manager, ... } @ inputs:

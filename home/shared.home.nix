@@ -31,6 +31,7 @@
         whatsapp-for-linux
         firefox
         blender
+        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # Terminal
         yazi # Terminal file eplorer
