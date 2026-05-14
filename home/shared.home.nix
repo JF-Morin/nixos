@@ -31,6 +31,7 @@
         whatsapp-for-linux
         firefox
         blender
+        bambu-studio
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # Terminal

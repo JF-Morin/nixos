@@ -103,11 +103,35 @@
 
     environment.sessionVariables = {
         WLR_NO_HARDWARE_CURSORS = "1";
-        NIXOS_OZONE_WL = "1";
+        NIXOS_OZONE_WL = "1"; # Forces Electron/Chronium apps to use Wayland natively
+        MOZ_ENABLE_WAYLAND = "1"; # Force Firefox to use Wayland natively
+
+        #inputs.zen-browser.packages.${pkgs.system}.default.overrideAttrs (oldAttrs: {
+        #    nativeBuildInputs = ( oldAttrs.nativeBuildInputs or [] ) ++ [ pkgs.makeWrapper ];
+        #    postInstall = (oldAttrs.postInstall or "") + ''
+        #        wrapProgram $out/bin/zen \
+        #        --set MOZ_ENABLE_WAYLAND "1" \
+        #        --set XDG_CURRENT_DESKTOP "Hyprland"
+        #    '';
+        #})
     };
 
-    xdg.portal.enable = true;
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    xdg.portal = {
+        enable = true;
+        extraPortals = [
+            pkgs.xdg-desktop-portal-hyprland
+            pkgs.xdg-desktop-portal-gtk
+        ];
+        config = {
+            common = {
+                default = [ "gtk" ];
+            };
+            hyprland = {
+                default = [ "hyprland" "gtk" ];
+                "org.freedesktop.impl.portal.Inhibit" = ["hyprland"];
+            };
+        };
+    };
 
     # List services that you want to enable:
 
