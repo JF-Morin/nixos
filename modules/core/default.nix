@@ -6,5 +6,6 @@
         ./network.nix
         ./sound.nix
         ./bluetooth.nix
+        ./sddm.nix
     ];
 }

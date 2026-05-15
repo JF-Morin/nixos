@@ -28,10 +28,6 @@
     # Enable flakes
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    # Enable the SDDM Display Manager
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
-    #services.displayManager.sddm.theme = "";
 
     # Enable Hyprlock
     #security.pam.services.hyprlock = {};
