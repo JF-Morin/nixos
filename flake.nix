@@ -28,6 +28,12 @@
             url = "github:youwen5/zen-browser-flake";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        # Stylix
+        stylix = {
+            url = "github:danth/stylix/release-25.05";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -56,7 +62,6 @@
             };
 
             lib = nixpkgs.lib;
-            #pkgs = nixpkgs.legacyPackages.${systemSettings.system};
             pkgs = import inputs.nixpkgs {
                system = systemSettings.system;
                config = {
@@ -74,6 +79,7 @@
                     system = systemSettings.system;
                     modules = [
                         ./hosts/laptop/configuration.nix
+                        inputs.stylix.nixosModules.stylix
                     ];
                     specialArgs = {
                         inherit pkgs;
@@ -88,6 +94,7 @@
                     system = systemSettings.system;
                     modules = [
                         ./hosts/desktop/configuration.nix
+                        inputs.stylix.nixosModules.stylix
                     ];
                     specialArgs = {
                         inherit pkgs;

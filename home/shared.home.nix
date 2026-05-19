@@ -31,7 +31,6 @@
         whatsapp-for-linux
         firefox
         blender
-        bambu-studio
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # Terminal
@@ -144,6 +143,9 @@
         #thunar # test vs dolphin
         #xfce.tumbler # for thunar thumbnails
         #ffmpegthumbnailer #video thumbnail
+
+
+        # UI
         
   ];
 

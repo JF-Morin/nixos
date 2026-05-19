@@ -12,6 +12,22 @@
             ../../modules/core
         ];
 
+    stylix = {
+        enable = true;
+        autoEnable = true;
+        targets = {
+            #gnome.enable = false;
+            #gdm.enable = false;
+            #hyprland = {
+            #    enable = true;
+            #    colors.enable = true;
+            #    image.enable = true;
+            #};
+        };
+        image = ./assets/wallpapers/wallpaper-1.png;
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    };
+
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -101,15 +117,6 @@
         WLR_NO_HARDWARE_CURSORS = "1";
         NIXOS_OZONE_WL = "1"; # Forces Electron/Chronium apps to use Wayland natively
         MOZ_ENABLE_WAYLAND = "1"; # Force Firefox to use Wayland natively
-
-        #inputs.zen-browser.packages.${pkgs.system}.default.overrideAttrs (oldAttrs: {
-        #    nativeBuildInputs = ( oldAttrs.nativeBuildInputs or [] ) ++ [ pkgs.makeWrapper ];
-        #    postInstall = (oldAttrs.postInstall or "") + ''
-        #        wrapProgram $out/bin/zen \
-        #        --set MOZ_ENABLE_WAYLAND "1" \
-        #        --set XDG_CURRENT_DESKTOP "Hyprland"
-        #    '';
-        #})
     };
 
     xdg.portal = {
