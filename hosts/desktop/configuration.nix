@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, systemSettings, userSettings, ... }:
+{ config, pkgs, systemSettings, userSettings, shareDescriptions, ... }:
 
 {
     imports =
@@ -15,15 +15,13 @@
     stylix = {
         enable = true;
         autoEnable = true;
-        targets = {
-            #gnome.enable = false;
-            #gdm.enable = false;
-            #hyprland = {
-            #    enable = true;
-            #    colors.enable = true;
-            #    image.enable = true;
-            #};
-        };
+        #targets = {
+        #    hyprland = {
+        #        enable = true;
+        #        colors.enable = true;
+        #        image.enable = true;
+        #    };
+        #};
         image = ./assets/wallpapers/wallpaper-1.png;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     };
@@ -97,7 +95,40 @@
     #environment.systemPackages = with pkgs; [
     #];
 
+    # SMB shares
     services.samba.enable = true;
+    systemd.tmpfiles.rules = [
+        # Create the global secrets file if missing
+        "f /etc/nixos/smb-secrets 0600 root root - # Change these values!\nusername=YOUR_USERNAME\password=YOUR_PASSWORD\n"
+
+        # Create parent folder for shares in NASTY
+        "d /home/${userSettings.username}/nasty 0755 ${userSettings.username} users -"
+    ] ++ (map ( share:
+            # Create a dedicated local folder for every share in the descriptions
+            "d /home/${userSettings.username}/nasty/${share.name} 0755 ${userSettings.username} users -"
+    ) shareDescriptions);
+
+    fileSystems = builtins.listToAttrs (map (share: {
+        name = "/home/${userSettings.username}/nasty/${share.name}";
+        value = {
+            device = "//${share.address}/${share.name}";
+            fsType = "cifs";
+            options = [
+                "credentials=/etc/nixos/smb-secrets"
+                "x-systemd.automount"
+                "noauto"
+                "x-systemd.idle-timeout=60"
+                "uid=1000"
+                "gid=1000"
+                "file_mode=0755"
+                "dir_mode=0755"
+                "iocharset=utf8"
+                "vers=3.0"
+            ];
+        };
+    }) shareDescriptions );
+    
+
     # Hyprland
     programs.hyprland = {
         enable = true;
@@ -113,10 +144,16 @@
     ]; 
 
 
-    environment.sessionVariables = {
-        WLR_NO_HARDWARE_CURSORS = "1";
-        NIXOS_OZONE_WL = "1"; # Forces Electron/Chronium apps to use Wayland natively
-        MOZ_ENABLE_WAYLAND = "1"; # Force Firefox to use Wayland natively
+    environment =  {
+        systemPackages = [
+            pkgs.cifs-utils
+        ];    
+
+        sessionVariables = {
+            WLR_NO_HARDWARE_CURSORS = "1";
+            NIXOS_OZONE_WL = "1"; # Forces Electron/Chronium apps to use Wayland natively
+            MOZ_ENABLE_WAYLAND = "1"; # Force Firefox to use Wayland natively
+        };
     };
 
     xdg.portal = {

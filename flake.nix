@@ -61,6 +61,16 @@
                 editor = "neovim";
             };
 
+            # --- Share Descriptions --- #
+            shareDescriptions =  [
+                { name = "nextcloud"; address = "192.168.1.69"; }
+                { name = "appdata"; address = "192.168.1.69"; }
+                { name = "photo_video"; address = "192.168.1.69"; }
+                { name = "media"; address = "192.168.1.69"; }
+                { name = "documents"; address = "192.168.1.69"; }
+            ];
+                
+
             lib = nixpkgs.lib;
             pkgs = import inputs.nixpkgs {
                system = systemSettings.system;
@@ -85,6 +95,7 @@
                         inherit pkgs;
                         inherit systemSettings;
                         inherit userSettings;
+                        inherit shareDescriptions;
                         inherit inputs;
                     };
                 };
@@ -100,6 +111,7 @@
                         inherit pkgs;
                         inherit systemSettings;
                         inherit userSettings;
+                        inherit shareDescriptions;
                         inherit inputs;
                     };
                 };

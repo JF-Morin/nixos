@@ -10,7 +10,9 @@
         ../modules/dev
         ../modules/terminal
         ../modules/wm
+        inputs.stylix.homeManagerModules.stylix
     ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -69,14 +71,14 @@
         # LSPs
         bash-language-server
         ccls
-        csharp-ls
+        #csharp-ls
         docker-language-server
         emmet-language-server
         gopls
         htmx-lsp
         lemminx
         lua-language-server
-        marksman
+        #marksman
         nil
         nixd
         nodePackages.vscode-json-languageserver
