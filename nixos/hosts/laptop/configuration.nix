@@ -8,8 +8,8 @@
     imports =
         [ # Include the results of the hardware scan.
             ./hardware-configuration.nix
-            ../../users/jf.nix
-            ../../modules/core
+            ../../../users/jf.nix
+            ../../modules
         ];
 
 # Bootloader.

@@ -8,23 +8,24 @@
     imports =
         [ # Include the results of the hardware scan.
             ./hardware-configuration.nix
-            ../../users/jf.nix
-            ../../modules/core
+            ../../../users/jf.nix
+            ../../modules
         ];
 
     stylix = {
         enable = true;
         autoEnable = true;
-        #targets = {
-        #    hyprland = {
-        #        enable = true;
-        #        colors.enable = true;
-        #        image.enable = true;
-        #    };
-        #};
-        image = ./assets/wallpapers/wallpaper-1.png;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+        image = .../../../assets/wallpapers/wallpaper-1.png;
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+        targets.gtk.enable = true;
+        targets.gnome.enable = true;
+
     };
+
+    programs.dconf.enable = true;
+
+
+
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;

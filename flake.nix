@@ -12,17 +12,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        astal = {
-            url = "github:aylur/astal";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        ags = {
-            url = "github:aylur/ags";
-            inputs.nixpkgs.follows = "nixpkgs";
-            inputs.astal.follows = "astal";
-        };
-
         # Zen browsers
         zen-browser = {
             url = "github:youwen5/zen-browser-flake";
@@ -36,7 +25,7 @@
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+    outputs = { self, nixpkgs, home-manager, ... } @inputs:
         let
             # --- System Settings --- #
             systemSettings = {
@@ -88,7 +77,7 @@
                 laptop = nixpkgs.lib.nixosSystem {
                     system = systemSettings.system;
                     modules = [
-                        ./hosts/laptop/configuration.nix
+                        ./nixos/hosts/laptop/configuration.nix
                         inputs.stylix.nixosModules.stylix
                     ];
                     specialArgs = {
@@ -104,7 +93,7 @@
                 desktop = nixpkgs.lib.nixosSystem {
                     system = systemSettings.system;
                     modules = [
-                        ./hosts/desktop/configuration.nix
+                        ./nixos/hosts/desktop/configuration.nix
                         inputs.stylix.nixosModules.stylix
                     ];
                     specialArgs = {
@@ -118,13 +107,14 @@
             };
 
             # --- Home-manager configurations --- #
-            homeConfigurations= {
+            homeConfigurations = {
 
                 # --- Desktop Home-Manager --- #
                 desktop = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     modules = [
-                        ./home/desktop.home.nix
+                        ./homeManager/desktop.home.nix
+                        inputs.stylix.homeModules.stylix
                     ];
                     extraSpecialArgs = {
                         inherit pkgs;
@@ -138,7 +128,8 @@
                 laptop = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     modules = [
-                        ./home/laptop.home.nix
+                        ./homeManager/laptop.home.nix
+                        inputs.stylix.homeModules.stylix
                     ];
                     extraSpecialArgs = {
                         inherit pkgs;

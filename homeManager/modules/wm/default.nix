@@ -3,6 +3,5 @@
 {
     imports = [
         ./hyprlock.nix
-        ./ags.nix
     ];
 }
