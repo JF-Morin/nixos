@@ -27,23 +27,12 @@
     #####################################################
     services.samba.enable = true;
 
-    # Create all necessary secrets file
-    environment.etc = builtins.listToAttrs (map (user: {
-        name = "nixos/smb-secrets-${user.username}";
-        value = {
-            text = ''
-        # Credentials for ${user.username}
-        username=YOUR_SMB_USERNAME
-        password=YOUR_SMB_PASSWORD
-            '';
-            mode = "0755";
-            user = "root";
-            group = "root";
-        };
-    }) sysConfig.users);
-
-    # Create all necessary parent folder (nasty)
+    # Create all necessary parent folder (nasty) and secrets
     systemd.tmpfiles.rules = [] ++ (builtins.concatMap (user: [
+        # Create the secrets file
+        #"f+ /etc/nixos/smb-secrets-${user.username} 0600 root root - username=SMB_USERNAME\\npassword=SMB_PASSWORD"
+        "d /etc/nixos/smb-secrets 0755 root root"
+
         # Create parent folder for shares in NASTY
         "d /home/${user.username}/nasty 0755 ${user.username} users -"
         
@@ -57,7 +46,7 @@
     fileSystems = builtins.listToAttrs (builtins.concatMap (user:
         let
           userUID = toString config.users.users.${user.username}.uid;
-          userGID = toString config.users.users.${user.username}.group;
+          userGID = toString config.users.groups.users.gid;
         in 
         map (share:{
             name = "/home/${user.username}/nasty/${share.name}";
@@ -65,14 +54,19 @@
                 device = "//${share.address}/${share.name}";
                 fsType = "cifs";
                 options = [
-                    "credentials=/etc/nixos/smb-secrets-${user.username}"
+                    "credentials=/etc/nixos/smb-secrets/smb-secrets-${user.username}"
                     "x-systemd.automount"
                     "noauto"
+                    "user"
                     "x-systemd.idle-timeout=60"
-                    "uid=${userUID}"
-                    "gid=${userGID}"
-                    "file_mode=0700"
-                    "dir_mode=0700"
+                        #"uid=${userUID}"
+                        #"gid=${userGID}"
+                    "uid=${user.username}"
+                    "gid=users"
+                    "forceuid"
+                    "forcegid"
+                    "file_mode=0755"
+                    "dir_mode=0755"
                     "iocharset=utf8"
                     "vers=3.0"
                 ];

@@ -99,13 +99,13 @@
     services.samba.enable = true;
     systemd.tmpfiles.rules = [
         # Create the global secrets file if missing
-        "f /etc/nixos/smb-secrets 0600 root root - # Change these values!\nusername=YOUR_USERNAME\password=YOUR_PASSWORD\n"
+        "f+ /etc/nixos/smb-secrets 0600 root root - # Change these values!\nusername=YOUR_USERNAME\password=YOUR_PASSWORD\n"
 
         # Create parent folder for shares in NASTY
-        "d /home/${userSettings.username}/nasty 0755 ${userSettings.username} users -"
+        "d+ /home/${userSettings.username}/nasty 0755 ${userSettings.username} users -"
     ] ++ (map ( share:
             # Create a dedicated local folder for every share in the descriptions
-            "d /home/${userSettings.username}/nasty/${share.name} 0755 ${userSettings.username} users -"
+            "d+ /home/${userSettings.username}/nasty/${share.name} 0755 ${userSettings.username} users -"
     ) shareDescriptions);
 
     fileSystems = builtins.listToAttrs (map (share: {
