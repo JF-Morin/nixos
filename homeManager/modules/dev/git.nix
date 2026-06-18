@@ -1,10 +1,10 @@
-{ config, pkgs, userSettings, ... }:
+{ config, pkgs, user,  ... }:
 
 {
     programs.git = {
         enable = true;
         userName = "JF-Morin";
-        userEmail = userSettings.email; 
+        userEmail = user.email; 
         extraConfig = {
             init.defaultBranch = "main";
             core.editor = "nvim";

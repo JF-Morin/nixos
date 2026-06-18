@@ -27,118 +27,92 @@
 
     outputs = { self, nixpkgs, home-manager, ... } @inputs:
         let
-            # --- System Settings --- #
-            systemSettings = {
-                system = "x86_64-linux";
-                hostname = "";
-                timezone = "Europe/Paris";
-                locale = "en_CA.UTF-8";
-                bootMode = "uefi";
-            };
+            # --- Settings --- #
+            allSystems = import ./config/systems.nix;
+            allUsers = import ./config/users.nix;
+            allShares = import ./config/shares.nix;
 
-            # --- User Settings --- #
-            userSettings = rec {
-                username = "jf";
-                name = "JF";
-                email = "jfmorincamo@gmail.com";
-                theme = "";
-                wm = "hyprland";
-                dotfileDir = "";
-                browser = "brave";
-                wmType = "wayland";
-                term = "ghostty";
-                editor = "neovim";
-            };
+            # Define lib module
+            #lib = nixpkgs.lib;
 
-            # --- Share Descriptions --- #
-            shareDescriptions =  [
-                { name = "nextcloud"; address = "192.168.1.69"; }
-                { name = "appdata"; address = "192.168.1.69"; }
-                { name = "photo_video"; address = "192.168.1.69"; }
-                { name = "media"; address = "192.168.1.69"; }
-                { name = "documents"; address = "192.168.1.69"; }
-            ];
-                
+            # Helper functions
+            mkNixOSConfiguration =
+                {
+                inputs,
+                sysConfig,
+                nixpkgs,
+                home-manager,
+                modules ? [ ],
+                }:
+                nixpkgs.lib.nixosSystem {
+                    # System type
+                    system = sysConfig.system.arch;
 
-            lib = nixpkgs.lib;
-            pkgs = import inputs.nixpkgs {
-               system = systemSettings.system;
-               config = {
-                   allowUnfree = true;
-                   allowUnfreePredicate = (_:true);
-               };
-            };
+                    # Special args for the config file
+                    specialArgs = {
+                        inherit sysConfig inputs;
+                    }; 
+
+                    # Modules to include
+                    modules = [
+                        # Unfree pkgs
+                        {
+                            nixpkgs.config.allowUnfree = true;
+                            nixpkgs.config.allowUnfreePredicate = (_:true);
+                        }
+
+                        # Configuration (common config file)
+                        ./nixos/hosts/configuration.nix
+
+                        # Stylix
+                        inputs.stylix.nixosModules.stylix
+
+                        # Home-Manager
+                        home-manager.nixosModules.home-manager
+                        {
+                            home-manager.useGlobalPkgs = true;
+                            home-manager.useUserPackages = true;
+
+                            # Creating nome-manager users dynamically
+                            home-manager.users = builtins.listToAttrs (map (user:
+                                let
+                                    # Set the userHomePath and if not found, take the default one
+                                    userHomePath = ./homeManager/${user.username}.home.nix;
+                                    homeFilePath = if builtins.pathExists userHomePath
+                                        then userHomePath
+                                    else ./homeManager/home.nix;
+                                in 
+                                    {
+                                    name = user.username;
+                                    #value = import homeFilePath {inherit user sysConfig inputs;}; 
+                                    value = {config, pkgs, lib, ...}:{
+                                        imports = [
+                                            homeFilePath
+                                        ];
+                                        _module.args = {inherit user sysConfig inputs;};
+                                    };
+                                }
+                            ) sysConfig.users);
+                        }
+
+                    ] ++ modules;
+                };
 
         in {
             # --- Configurations --- #
-            nixosConfigurations = {
-
-                # --- Laptop configuration --- #
-                laptop = nixpkgs.lib.nixosSystem {
-                    system = systemSettings.system;
-                    modules = [
-                        ./nixos/hosts/laptop/configuration.nix
-                        inputs.stylix.nixosModules.stylix
-                    ];
-                    specialArgs = {
-                        inherit pkgs;
-                        inherit systemSettings;
-                        inherit userSettings;
-                        inherit shareDescriptions;
-                        inherit inputs;
-                    };
-                };
-
-                # --- Desktop configuration --- #
-                desktop = nixpkgs.lib.nixosSystem {
-                    system = systemSettings.system;
-                    modules = [
-                        ./nixos/hosts/desktop/configuration.nix
-                        inputs.stylix.nixosModules.stylix
-                    ];
-                    specialArgs = {
-                        inherit pkgs;
-                        inherit systemSettings;
-                        inherit userSettings;
-                        inherit shareDescriptions;
-                        inherit inputs;
-                    };
-                };
-            };
-
-            # --- Home-manager configurations --- #
-            homeConfigurations = {
-
-                # --- Desktop Home-Manager --- #
-                desktop = home-manager.lib.homeManagerConfiguration {
-                    inherit pkgs;
-                    modules = [
-                        ./homeManager/desktop.home.nix
-                        inputs.stylix.homeModules.stylix
-                    ];
-                    extraSpecialArgs = {
-                        inherit pkgs;
-                        inherit systemSettings;
-                        inherit userSettings;
-                        inherit inputs;
-                    };
-                };
-
-                # --- Laptop Home-Manager --- #
-                laptop = home-manager.lib.homeManagerConfiguration {
-                    inherit pkgs;
-                    modules = [
-                        ./homeManager/laptop.home.nix
-                        inputs.stylix.homeModules.stylix
-                    ];
-                    extraSpecialArgs = {
-                        inherit pkgs;
-                        inherit systemSettings;
-                        inherit userSettings;
-                        inherit inputs;
-                    };
-                };
-            };
+            nixosConfigurations = builtins.mapAttrs (systemName: system: 
+                let
+                    systemUsers = map (username: allUsers.${username}) system.users;
+                in 
+                    mkNixOSConfiguration {
+                        inherit nixpkgs home-manager inputs;
+                        sysConfig = {
+                            inherit system;
+                            users = systemUsers;
+                            shares = allShares;
+                        };
+                    }
+            ) allSystems;
 
         };
 }

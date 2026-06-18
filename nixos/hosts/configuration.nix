@@ -1,20 +1,93 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, systemSettings, userSettings, shareDescriptions, ... }:
+{ config, pkgs, sysConfig, ... }:
 
 {
     imports = [ # Include the results of the hardware scan.
-        ./hardware-configuration.nix
-        ../../../users/jf.nix
-        ../../modules
+        ./hardware-configurations/${sysConfig.system.name}.hardware-configuration.nix
+        ../modules
     ];
 
+    #####################################################
+    # Create users from the settings.users
+    #####################################################
+    programs.zsh.enable = true;
+    users.defaultUserShell = pkgs.zsh;
+    users.users = builtins.listToAttrs (map (user: {
+        name = user.username;
+        value = {
+            isNormalUser = user.isNormalUser;
+            description = user.description;
+            extraGroups = [ "networkmanager" ] ++ (if user.isAdmin then [ "wheel" ] else []);
+            shell = pkgs.${user.defaultShell};
+        };
+    }) sysConfig.users);
+
+
+    #####################################################
+    # Create SMB shares for all users
+    #####################################################
+    services.samba.enable = true;
+
+    # Create all necessary secrets file
+    environment.etc = builtins.listToAttrs (map (user: {
+        name = "nixos/smb-secrets-${user.username}";
+        value = {
+            text = ''
+        # Credentials for ${user.username}
+        username=YOUR_SMB_USERNAME
+        password=YOUR_SMB_PASSWORD
+            '';
+            mode = "0755";
+            user = "root";
+            group = "root";
+        };
+    }) sysConfig.users);
+
+    # Create all necessary parent folder (nasty)
+    systemd.tmpfiles.rules = [] ++ (builtins.concatMap (user: [
+        # Create parent folder for shares in NASTY
+        "d /home/${user.username}/nasty 0755 ${user.username} users -"
+        
+    ] ++ (map (share: 
+            # Create a dedicated local folder for every share in the descriptions
+            "d /home/${user.username}/nasty/${share.name} 0755 ${user.username} users -"
+        ) sysConfig.shares)
+    ) sysConfig.users);
+
+    # Create all mount folders with the user's credentials
+    fileSystems = builtins.listToAttrs (builtins.concatMap (user:
+        let
+          userUID = toString config.users.users.${user.username}.uid;
+          userGID = toString config.users.users.${user.username}.group;
+        in 
+        map (share:{
+            name = "/home/${user.username}/nasty/${share.name}";
+            value = {
+                device = "//${share.address}/${share.name}";
+                fsType = "cifs";
+                options = [
+                    "credentials=/etc/nixos/smb-secrets-${user.username}"
+                    "x-systemd.automount"
+                    "noauto"
+                    "x-systemd.idle-timeout=60"
+                    "uid=${userUID}"
+                    "gid=${userGID}"
+                    "file_mode=0700"
+                    "dir_mode=0700"
+                    "iocharset=utf8"
+                    "vers=3.0"
+                ];
+            };
+        }) sysConfig.shares
+    ) sysConfig.users);
+
+
+    #####################################################
+    # Apply default style TODO: make it dynamic later
+    #####################################################
     stylix = {
         enable = true;
         autoEnable = true;
-        image = .../../../assets/wallpapers/wallpaper-1.png;
+        image = ../../assets/wallpapers/wallpaper-1.png;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         targets.gtk.enable = true;
         targets.gnome.enable = true;
@@ -30,7 +103,7 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = userSettings.name + "Desktop"; # Define your hostname.
+    networking.hostName = "JF-"+"${sysConfig.system.name}"; # Define your hostname.
     #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # Enable networking
     networking.networkmanager.enable = true;
@@ -95,38 +168,6 @@
     #environment.systemPackages = with pkgs; [
     #];
 
-    # SMB shares
-    services.samba.enable = true;
-    systemd.tmpfiles.rules = [
-        # Create the global secrets file if missing
-        "f /etc/nixos/smb-secrets 0600 root root - # Change these values!\nusername=YOUR_USERNAME\password=YOUR_PASSWORD\n"
-
-        # Create parent folder for shares in NASTY
-        "d /home/${userSettings.username}/nasty 0755 ${userSettings.username} users -"
-    ] ++ (map ( share:
-            # Create a dedicated local folder for every share in the descriptions
-            "d /home/${userSettings.username}/nasty/${share.name} 0755 ${userSettings.username} users -"
-    ) shareDescriptions);
-
-    fileSystems = builtins.listToAttrs (map (share: {
-        name = "/home/${userSettings.username}/nasty/${share.name}";
-        value = {
-            device = "//${share.address}/${share.name}";
-            fsType = "cifs";
-            options = [
-                "credentials=/etc/nixos/smb-secrets"
-                "x-systemd.automount"
-                "noauto"
-                "x-systemd.idle-timeout=60"
-                "uid=1000"
-                "gid=1000"
-                "file_mode=0755"
-                "dir_mode=0755"
-                "iocharset=utf8"
-                "vers=3.0"
-            ];
-        };
-    }) shareDescriptions );
     
 
     # Hyprland
@@ -173,20 +214,12 @@
         };
     };
 
-    # List services that you want to enable:
-
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
 
     # Enable SMB service
     services.gvfs.enable = true;
     services.tailscale.enable = true;
-
-    # Open ports in the firewall.
-    # networking.firewall.allowedTCPPorts = [ ... ];
-    # networking.firewall.allowedUDPPorts = [ ... ];
-    # Or disable the firewall altogether.
-    # networking.firewall.enable = false;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

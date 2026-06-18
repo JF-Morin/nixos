@@ -1,4 +1,4 @@
-{ config, pkgs, userSettings, ... }:
+{ config, pkgs, user, ... }:
 
 {
     programs.gh = {

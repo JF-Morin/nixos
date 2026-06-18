@@ -1,23 +1,28 @@
-{ inputs, config, pkgs, userSettings, systemSettings, ... }:
+{ config, pkgs, inputs, user, sysConfig, ... }:
 
 {
-    home.username = userSettings.username;
-    home.homeDirectory = "/home/" + userSettings.username;
-
+    #################################################
+    # Set username, home directory and version
+    #################################################
+    home.username = user.username;
+    home.homeDirectory = "/home/" + user.username;
     home.stateVersion = "25.05"; # Please read the comment before changing.
 
+
+    #################################################
+    # Import modules
+    #################################################
     imports = [
-        ./modules/dev
+        ./modules/dev 
         ./modules/terminal
         ./modules/wm
     ];
 
-    # The home.packages option allows you to install Nix packages into your
-    # environment.
+    #################################################
+    # Add packages
+    #################################################
+    # Base packages
     home.packages = with pkgs; [
-
-        # Ags/Astal
-
         # Applications
         obsidian
         vlc
@@ -109,84 +114,36 @@
         imagemagick
         webp-pixbuf-loader
 
-        # Tools for Fusion360
-        #wine-wayland
-        #winetricks
-        #coreutils
-        #gawk
-        #lsb-release
-        #cabextract
-        #mesa
-        #mesa-demos
-        #polkit
-        #p7zip
-        #samba
-        #spacenavd
-        #bc
-        #mokutil
-        #xorg.xrandr
-        #virtualglLib
-        #gettext
-
         # Hyprland
-        #ags # Widgets and bar
         dunst # Notifications
-        #inputs.astal.packages.${systemSettings.system}.default
         libnotify # for notifications
         rofi-wayland # app launcher
         waybar # status bar
         wl-clipboard # Clipboard
-        #hyprlock # Lock screen
         hyprshot # Screenshots
         nautilus # File explorer => test vs thunar
         wlogout
         pavucontrol
-        #thunar # test vs dolphin
-        #xfce.tumbler # for thunar thumbnails
-        #ffmpegthumbnailer #video thumbnail
 
-
-        # UI
-
-    ];
+    ]
+        # Packages for "desktop"
+        ++ pkgs.lib.optionals (sysConfig.system.name == "desktop")[
+            freecad-wayland
+        ]
+        # Packages for "laptop"
+        ++ pkgs.lib.optionals (sysConfig.system.name == "laptop")[
+            brightnessctl
+        ];
 
     gtk.enable = true;
     stylix.targets.gtk.enable = true;
-    
-    
-
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
     home.file = {
-        # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-        # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-        # # symlink to the Nix store copy.
         # ".screenrc".source = dotfiles/screenrc;
-
-        # # You can also set the file content immediately.
-        # ".gradle/gradle.properties".text = ''
-        #   org.gradle.console=verbose
-        #   org.gradle.daemon.idletimeout=3600000
-        # '';
     };
 
-    # Home Manager can also manage your environment variables through
-    # 'home.sessionVariables'. These will be explicitly sourced when using a
-    # shell provided by Home Manager. If you don't want to manage your shell
-    # through Home Manager then you have to manually source 'hm-session-vars.sh'
-    # located at either
-    #
-    #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  /etc/profiles/per-user/jf/etc/profile.d/hm-session-vars.sh
-    #
     home.sessionVariables = {
         # EDITOR = "emacs";
     };

@@ -1,9 +1,9 @@
-{ config, pkgs, userSettings, systemSettings, ...} :
+{ config, pkgs, sysConfig, ...} :
 {
 
     services.automatic-timezoned.enable = true;
 
-    i18n.defaultLocale = systemSettings.locale;
+    i18n.defaultLocale = sysConfig.system.locale;
 
     i18n.extraLocaleSettings = {
         LC_ADDRESS = "fr_FR.UTF-8";

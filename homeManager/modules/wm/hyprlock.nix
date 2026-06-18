@@ -1,10 +1,10 @@
-{ config, pkgs, userSettings, ... } : 
+{ config, pkgs, lib, ... } : 
 
 {
     programs.hyprlock = {
         enable = true;
         settings = {
-            background = [
+            background = lib.mkForce [
                 {
                     monitor = "";
                     path = "/home/jf/.wallpapers/wallpaper_nature_1.png";
@@ -45,7 +45,8 @@
                 # User name
                 {
                     monitor = "";
-                    text = "${userSettings.name}";
+                    #text = "${user.name}";
+                    text = "JF";
                     color = "rgba(216, 222, 233, 0.70)";
                     font_size = 24;
                     font_family = "JetBrains Mono";
@@ -74,7 +75,7 @@
 
 
             # Password input
-            input-field = {
+            input-field = lib.mkForce {
                 monitor = "";
                 size = "300,50";
                 outline_thickness = 2;
