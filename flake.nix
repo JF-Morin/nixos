@@ -4,11 +4,11 @@
     inputs = {
 
         # Nixpkgs
-        nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
+        nixpkgs.url = "github:nixos/nixpkgs/release-26.05";
 
         # Home-manager
         home-manager = {
-            url = "github:nix-community/home-manager/release-25.05";
+            url = "github:nix-community/home-manager/release-26.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
@@ -20,12 +20,18 @@
 
         # Stylix
         stylix = {
-            url = "github:danth/stylix/release-25.05";
+            url = "github:danth/stylix/release-26.05";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # Quickshell
+        quickshell ={
+            url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, ... } @inputs:
+    outputs = { self, nixpkgs, home-manager, quickshell, ... } @inputs:
         let
             # --- Settings --- #
             allSystems = import ./config/systems.nix;

@@ -6,7 +6,7 @@
     #################################################
     home.username = user.username;
     home.homeDirectory = "/home/" + user.username;
-    home.stateVersion = "25.05"; # Please read the comment before changing.
+    home.stateVersion = "26.05"; # Please read the comment before changing.
 
 
     #################################################
@@ -34,7 +34,6 @@
         steam
         libreoffice
         kicad
-        whatsapp-for-linux
         firefox
         blender
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -59,15 +58,13 @@
         neovim
         vscodium
         docker
-        #gh #github
         python314
         python313Packages.pip        
         rustc
         cargo
         go
         zig
-        #git
-        nodejs_20
+        nodejs_26
         bun
         gcc # Required for treesitter?
         gnumake # Required for treesitter?
@@ -85,7 +82,7 @@
         #marksman
         nil
         nixd
-        nodePackages.vscode-json-languageserver
+        vscode-json-languageserver
         sqls
         svelte-language-server
         tailwindcss-language-server
@@ -117,13 +114,22 @@
         # Hyprland
         dunst # Notifications
         libnotify # for notifications
-        rofi-wayland # app launcher
+        rofi # app launcher
         waybar # status bar
         wl-clipboard # Clipboard
         hyprshot # Screenshots
         nautilus # File explorer => test vs thunar
         wlogout
         pavucontrol
+
+        # Quickshell and dependencies
+        (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default.withModules [
+            pkgs.qt6.qtsvg
+            pkgs.qt6.qtimageformats
+            pkgs.qt6.qtmultimedia
+            pkgs.qt6.qt5compat
+        ])
+
 
     ]
         # Packages for "desktop"
@@ -134,6 +140,10 @@
         ++ pkgs.lib.optionals (sysConfig.system.name == "laptop")[
             brightnessctl
         ];
+
+    qt = {
+        enable = true;
+    };
 
     gtk.enable = true;
     stylix.targets.gtk.enable = true;
