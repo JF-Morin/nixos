@@ -89,6 +89,8 @@
     };
 
     programs.dconf.enable = true;
+    security.polkit.enable = true;
+    services.dbus.enable = true;
 
 
 
@@ -121,12 +123,20 @@
 
 
 
+    ############################################
     # GPU Driver and OpenGL
+    ############################################
     hardware.graphics = {
         enable = true;
-        #         driSupport = true;
-        #         driSupport32Bit = true;
+        enable32Bit = true;
     };
+
+    boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+    boot.extraModulePackages = [ config.boot.kernelPackages.nvidiaPackages.legacy_580 ];
+    boot.kernelParams = [
+        "nvidia-drm.fbdev=1"
+        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    ];
 
 
     services.xserver.videoDrivers = ["nvidia"];
@@ -142,29 +152,29 @@
 
         nvidiaSettings = true;
 
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
 
+        #prime = {
+            #offload.enable = true;
+            #offload.enableOffloadCmd = true;
+            #intelBusId = "PCI:0@0:2:0";
+            #nvidiaBusId = "PCI:1@0:0:0";
+            #};
     };
 
 
 
-    #hardware.nvidia.modesetting.enable = true;
 
-    programs.steam.enable = true;
-    #programs.steam.gamescopeSession = true;
 
-    programs.gamemode.enable = true;
 
-    # Space mouse
-    hardware.spacenavd.enable = true;
 
-    # List packages installed in system profile. To search, run: $ nix search wget
-    #environment.systemPackages = with pkgs; [
-    #];
+
+
 
     
-
+    ########################################
     # Hyprland
+    ########################################
     programs.hyprland = {
         enable = true;
         withUWSM = true;
@@ -185,7 +195,12 @@
         ];    
 
         sessionVariables = {
+            AQ_DRM_DEVICES = "/dev/dri/card1";
+            GBM_BACKEND = "nvidia-drm";
+            LIBVA_DRIVER_NAME = "nvidia";
+            __GLX_VENDOR_LIBRARY_NAME = "nvidia";
             WLR_NO_HARDWARE_CURSORS = "1";
+
             NIXOS_OZONE_WL = "1"; # Forces Electron/Chronium apps to use Wayland natively
             MOZ_ENABLE_WAYLAND = "1"; # Force Firefox to use Wayland natively
         };
@@ -207,6 +222,16 @@
             };
         };
     };
+
+
+
+    programs.steam.enable = true;
+    #programs.steam.gamescopeSession = true;
+
+    programs.gamemode.enable = true;
+
+    # Space mouse
+    hardware.spacenavd.enable = true;
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
