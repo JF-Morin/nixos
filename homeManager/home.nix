@@ -130,6 +130,9 @@
             pkgs.qt6.qt5compat
         ])
 
+        # Noctalia
+        inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+
 
     ]
         # Packages for "desktop"
@@ -147,6 +150,7 @@
 
     gtk.enable = true;
     stylix.targets.gtk.enable = true;
+
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.

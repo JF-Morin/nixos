@@ -25,13 +25,19 @@
         };
 
         # Quickshell
-        quickshell ={
+        quickshell = {
             url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # Noctalia
+        noctalia = {
+            url = "github:noctalia-dev/noctalia";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, quickshell, ... } @inputs:
+    outputs = { self, nixpkgs, home-manager, quickshell, noctalia, ... } @inputs:
         let
             # --- Settings --- #
             allSystems = import ./config/systems.nix;
@@ -78,6 +84,7 @@
                         {
                             home-manager.useGlobalPkgs = true;
                             home-manager.useUserPackages = true;
+                            home-manager.backupFileExtension = "backup";
 
                             # Creating nome-manager users dynamically
                             home-manager.users = builtins.listToAttrs (map (user:
@@ -90,7 +97,6 @@
                                 in 
                                     {
                                     name = user.username;
-                                    #value = import homeFilePath {inherit user sysConfig inputs;}; 
                                     value = {config, pkgs, lib, ...}:{
                                         imports = [
                                             homeFilePath

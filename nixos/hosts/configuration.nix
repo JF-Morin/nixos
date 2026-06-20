@@ -3,6 +3,7 @@
 {
     imports = [ # Include the results of the hardware scan.
         ./hardware-configurations/${sysConfig.system.name}.hardware-configuration.nix
+        ../modules/gpu/${sysConfig.system.name}.gpu.nix
         ../modules
     ];
 
@@ -123,45 +124,6 @@
 
 
 
-    ############################################
-    # GPU Driver and OpenGL
-    ############################################
-    hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
-    };
-
-    boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
-    boot.extraModulePackages = [ config.boot.kernelPackages.nvidiaPackages.legacy_580 ];
-    boot.kernelParams = [
-        "nvidia-drm.fbdev=1"
-        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    ];
-
-
-    services.xserver.videoDrivers = ["nvidia"];
-
-    hardware.nvidia = {
-        modesetting.enable = true;
-
-        powerManagement.enable = false;
-
-        powerManagement.finegrained = false;
-
-        open = false;
-
-        nvidiaSettings = true;
-
-        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-
-        #prime = {
-            #offload.enable = true;
-            #offload.enableOffloadCmd = true;
-            #intelBusId = "PCI:0@0:2:0";
-            #nvidiaBusId = "PCI:1@0:0:0";
-            #};
-    };
-
 
 
 
@@ -195,14 +157,16 @@
         ];    
 
         sessionVariables = {
-            AQ_DRM_DEVICES = "/dev/dri/card1";
-            GBM_BACKEND = "nvidia-drm";
-            LIBVA_DRIVER_NAME = "nvidia";
-            __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+            # Disables hardware-rendered mouse cursors. 
+            # Fixes the common issue on Wayland where the mouse cursor becomes completely invisible on NVIDIA GPUs.
             WLR_NO_HARDWARE_CURSORS = "1";
 
-            NIXOS_OZONE_WL = "1"; # Forces Electron/Chronium apps to use Wayland natively
-            MOZ_ENABLE_WAYLAND = "1"; # Force Firefox to use Wayland natively
+            # Forces Electron and Chromium-based apps (like VS Code, Discord, and Chrome) to use Wayland natively.
+            NIXOS_OZONE_WL = "1"; 
+
+            # Forces Firefox to use Wayland natively instead of running through XWayland.
+            MOZ_ENABLE_WAYLAND = "1";
         };
     };
 
