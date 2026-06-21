@@ -91,13 +91,13 @@
         yaml-language-server
         zls
         # Formatter
-        nixfmt-classic
+        nixfmt
 
 
         # Networking
         tailscale # VPN service
         nmap # Network mapping
-        protonvpn-gui # Proton VPN
+        proton-vpn # Proton VPN
 
         # Tools
         flatpak
