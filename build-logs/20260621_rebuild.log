@@ -1,3 +1,99 @@
 warning: Git tree '/home/jf/Projects/nixos' is dirty
 building the system configuration...
 warning: Git tree '/home/jf/Projects/nixos' is dirty
+evaluation warning: jf profile: The option `programs.git.userEmail' defined in `/nix/store/6icxji59brgi2b817r83px0mi2s7l5dv-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings.user.email'.
+evaluation warning: jf profile: The option `programs.git.userName' defined in `/nix/store/6icxji59brgi2b817r83px0mi2s7l5dv-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings.user.name'.
+evaluation warning: jf profile: The option `programs.git.extraConfig' defined in `/nix/store/6icxji59brgi2b817r83px0mi2s7l5dv-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings'.
+these 13 derivations will be built:
+  /nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv
+  /nix/store/1irzyhh1jix92gz8f7bda97gn6vjcb4v-firefox-152.0.1.drv
+  /nix/store/w9dawxy3czlha0bzjvqiinm7g081ykbh-home-manager-path.drv
+  /nix/store/2nzhsfgvy8wkri37sr4d327aa2b3c9zs-user-environment.drv
+  /nix/store/8h428gblxzvz4b9bknw4sdmlpd1ri6m0-hm_gitconfig.drv
+  /nix/store/j10xflb8mw9c9pv20x6kb25xdd4hwlfz-hm_fontconfigconf.d10hmfonts.conf.drv
+  /nix/store/hm0wflnnm6ll5dr2vfigkl10ljcxwk0a-home-manager-files.drv
+  /nix/store/9rx5c1bx3xlqm38c4mwj6nf5lp7b2rcs-home-manager-generation.drv
+  /nix/store/z2c5hfc48q85wxgqaaln03b3j008z18l-unit-home-manager-jf.service.drv
+  /nix/store/bfr792jd20pbqirjvzrvb31cpcs2ryf1-system-units.drv
+  /nix/store/ywnbsn2p8g8v0vwbywwmqckbibwjqyq7-etc.drv
+  /nix/store/v503s6vsnicviansrng7q91rml1vafmn-activate.drv
+  /nix/store/kizsd8c7gd9lr9if07h3lz0m9yzpa6rc-nixos-system-JF-laptop-26.05.20260620.af49492.drv
+building '/nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv'...
+error: Cannot build '/nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv'.
+       Reason: builder failed with exit code 2.
+       Output paths:
+         /nix/store/7sxzz14zijqjc5ld6x8dp5wxdwwb1jkc-firefox-unwrapped-152.0.1
+         /nix/store/kravh6nmpxm2dw9axqr5775li5wlb0j8-firefox-unwrapped-152.0.1-symbols
+         /nix/store/m6kqx49brakjawp9j4asdvlaaahpn2rn-firefox-unwrapped-152.0.1-debug
+       Last 25 log lines:
+       > /nix/store/arwxx05v5p0lh75a6qx7h8dsp6pil31n-clang-wrapper-21.1.8/bin/clang++ -std=gnu++20 -o Unified_cpp_media_mediaelement0.o -c  -I/build/firefox-152.0.1/objdir/dist/stl_wrappers -I/build/firefox-152.0.1/objdir/dist/system_wrappers -include /build/firefox-152.0.1/config/gcc_hidden.h -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-strong -fstack-clash-protection -fstrict-flex-arrays=1 -DNDEBUG=1 -DTRIMMED=1 -DMOZ_HAS_MOZGLUE -DMOZILLA_INTERNAL_API -DIMPL_LIBXUL -DMOZ_SUPPORT_LEAKCHECKING -DSTATIC_EXPORTABLE_JS_API -I/build/firefox-152.0.1/dom/media/mediaelement -I/build/firefox-152.0.1/objdir/dom/media/mediaelement -I/build/firefox-152.0.1/objdir/ipc/ipdl/_ipdlheaders -I/build/firefox-152.0.1/ipc/chromium/src -I/build/firefox-152.0.1/toolkit/components/telemetry -I/build/firefox-152.0.1/xpcom/base -I/build/firefox-152.0.1/dom/base -I/build/firefox-152.0.1/dom/media -I/build/firefox-152.0.1/third_party/abseil-cpp -I/build/firefox-152.0.1/third_party/libwebrtc -I/build/firefox-152.0.1/objdir/dist/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/6wdiwrh7j4h8ml1rvnaiflwc3738nr9h-nss-3.125-dev/include/nss -I/build/firefox-152.0.1/objdir/dist/include/nss -I/nix/store/qd3gla6sn63is90462qdfqwsvppkrhby-libpng-apng-1.6.56-dev/include/libpng16 -I/nix/store/h7ik0g1xxayy0z8h27zbvrgmac63irgs-zlib-1.3.2-dev/include -I/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman-1 -DMOZILLA_CLIENT -include /build/firefox-152.0.1/objdir/mozilla-config.h -fno-rtti -pthread -fno-sized-deallocation -fno-aligned-new -ffunction-sections -fdata-sections -fno-math-errno -fno-exceptions -fdiagnostics-absolute-paths -fPIC -gdwarf-4 -gsimple-template-names --start-no-unused-arguments -mllvm=-dwarf-linkage-names=Abstract --end-no-unused-arguments -O3 -fomit-frame-pointer -funwind-tables -Wall -Wbitfield-enum-conversion -Wempty-body -Wformat-type-confusion -Wignored-qualifiers -Wpointer-arith -Wshadow-field-in-constructor-modified -Wsign-compare -Wtautological-constant-in-range-compare -Wtype-limits -Wno-error=tautological-type-limit-compare -Wunreachable-code -Wunreachable-code-return -Wunused-but-set-parameter -Wno-invalid-offsetof -Wclass-varargs -Wempty-init-stmt -Wfloat-overflow-conversion -Wfloat-zero-conversion -Wloop-analysis -Wno-range-loop-analysis -Wno-deprecated-anon-enum-enum-conversion -Wno-deprecated-enum-enum-conversion -Wdeprecated-literal-operator -Winvalid-utf8 -Wcomma -Wimplicit-fallthrough -Wstring-conversion -Wno-inline-new-delete -Wno-error=deprecated-declarations -Wno-error=array-bounds -Wno-error=free-nonheap-object -Wno-error=atomic-alignment -Wno-error=deprecated-builtins -Wformat -Wformat-security -Wno-psabi -Wthread-safety -Wno-error=builtin-macro-redefined -Wno-vla-cxx-extension -Wno-unknown-warning-option -Wno-character-conversion -fno-strict-aliasing -ffp-contract=off -DNS_FREE_PERMANENT_DATA=1 -fprofile-generate -MD -MP -MF .deps/Unified_cpp_media_mediaelement0.o.pp   Unified_cpp_media_mediaelement0.cpp
+       > make[3]: *** [/build/firefox-152.0.1/config/makefiles/rust.mk:554: force-cargo-library-build] Error 101
+       > make[3]: Leaving directory '/build/firefox-152.0.1/objdir/toolkit/library/rust'
+       > make[2]: *** [/build/firefox-152.0.1/config/recurse.mk:72: toolkit/library/rust/target-objects] Error 2
+       > make[2]: *** Waiting for unfinished jobs....
+       > In file included from /build/firefox-152.0.1/objdir/dom/media/mediaelement/Unified_cpp_media_mediaelement0.cpp:20:
+       > In file included from /build/firefox-152.0.1/dom/media/mediaelement/HTMLVideoElement.cpp:11:
+       > In file included from /build/firefox-152.0.1/dom/media/webrtc/jsapi/RTCStatsReport.h:8:
+       > In file included from /build/firefox-152.0.1/third_party/libwebrtc/api/units/timestamp.h:18:
+       > In file included from /build/firefox-152.0.1/third_party/libwebrtc/api/units/time_delta.h:20:
+       > In file included from /build/firefox-152.0.1/third_party/libwebrtc/rtc_base/units/unit_base.h:19:
+       > In file included from /build/firefox-152.0.1/third_party/libwebrtc/rtc_base/checks.h:59:
+       > In file included from /build/firefox-152.0.1/third_party/abseil-cpp/absl/strings/has_absl_stringify.h:22:
+       > In file included from /build/firefox-152.0.1/third_party/abseil-cpp/absl/strings/string_view.h:40:
+       > In file included from /build/firefox-152.0.1/third_party/abseil-cpp/absl/base/nullability.h:184:
+       > In file included from /build/firefox-152.0.1/third_party/abseil-cpp/absl/base/internal/nullability_impl.h:23:
+       > /build/firefox-152.0.1/third_party/abseil-cpp/absl/meta/type_traits.h:394:22: warning: builtin __is_trivially_relocatable is deprecated; use __builtin_is_cpp_trivially_relocatable instead [-Wdeprecated-builtins]
+       >   394 |                     (__is_trivially_relocatable(T) &&
+       >       |                      ^
+       > 1 warning generated.
+       > make[3]: Leaving directory '/build/firefox-152.0.1/objdir/dom/media/mediaelement'
+       > make[2]: Leaving directory '/build/firefox-152.0.1/objdir'
+       > make[1]: *** [/build/firefox-152.0.1/config/recurse.mk:34: compile] Error 2
+       > make[1]: Leaving directory '/build/firefox-152.0.1/objdir'
+       > make: *** [/build/firefox-152.0.1/config/rules.mk:357: default] Error 2
+       For full logs, run:
+         nix log /nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv
+building '/nix/store/8h428gblxzvz4b9bknw4sdmlpd1ri6m0-hm_gitconfig.drv'...
+error: Cannot build '/nix/store/1irzyhh1jix92gz8f7bda97gn6vjcb4v-firefox-152.0.1.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/841p28cx36qdhxvryqsnm5p9di6blx3a-firefox-152.0.1
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/w9dawxy3czlha0bzjvqiinm7g081ykbh-home-manager-path.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/jv26sjl376c22w3dyyybdq6641x7va20-home-manager-path
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/j10xflb8mw9c9pv20x6kb25xdd4hwlfz-hm_fontconfigconf.d10hmfonts.conf.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/ld88lhb1kqvsj8q9i70dyzqsr7h70rcp-hm_fontconfigconf.d10hmfonts.conf
+error: Cannot build '/nix/store/9rx5c1bx3xlqm38c4mwj6nf5lp7b2rcs-home-manager-generation.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/m45k9gn1rqfkp33f4a08bsc5qzvlv4mr-home-manager-generation
+error: Cannot build '/nix/store/2nzhsfgvy8wkri37sr4d327aa2b3c9zs-user-environment.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/jgv9nnfjb7b87nicsap7g7k77qgfnzcx-user-environment
+error: Build failed due to failed dependency
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/ywnbsn2p8g8v0vwbywwmqckbibwjqyq7-etc.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/6bd0lhgnmk6ygw0ldiacm51ag2nlqbwz-etc
+error: Cannot build '/nix/store/z2c5hfc48q85wxgqaaln03b3j008z18l-unit-home-manager-jf.service.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/whdrvi28d432l00gg7bq1vxb4wpasp20-unit-home-manager-jf.service
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/v503s6vsnicviansrng7q91rml1vafmn-activate.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/g2dii7ywxrvw5nsspcgibgl4sf77pjnz-activate
+error: Cannot build '/nix/store/kizsd8c7gd9lr9if07h3lz0m9yzpa6rc-nixos-system-JF-laptop-26.05.20260620.af49492.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/gk6c943ypkgf6jzxqqybxynmwpgx3lpn-nixos-system-JF-laptop-26.05.20260620.af49492
+error: Build failed due to failed dependency
+Command 'nix --extra-experimental-features 'nix-command flakes' build --print-out-paths '.#nixosConfigurations."laptop".config.system.build.toplevel' --no-link --max-jobs 1 --cores 2' returned non-zero exit status 1.
