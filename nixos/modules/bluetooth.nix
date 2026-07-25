@@ -13,5 +13,6 @@
         };
 
     };
-    services.blueman.enable = true;
+    # Not needed because of noctalia
+    # services.blueman.enable = true;
 }
