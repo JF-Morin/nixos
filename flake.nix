@@ -5,6 +5,7 @@
 
         # Nixpkgs
         nixpkgs.url = "github:nixos/nixpkgs/release-26.05";
+        nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
         # Home-manager
         home-manager = {
@@ -37,7 +38,7 @@
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, quickshell, noctalia, ... } @inputs:
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, quickshell, noctalia, ... } @inputs:
         let
             # --- Settings --- #
             allSystems = import ./config/systems.nix;
@@ -53,6 +54,7 @@
                 inputs,
                 sysConfig,
                 nixpkgs,
+                nixpkgs-unstable,
                 home-manager,
                 modules ? [ ],
                 }:
@@ -117,7 +119,7 @@
                     systemUsers = map (username: allUsers.${username}) system.users;
                 in 
                     mkNixOSConfiguration {
-                        inherit nixpkgs home-manager inputs;
+                        inherit nixpkgs nixpkgs-unstable home-manager inputs;
                         sysConfig = {
                             inherit system;
                             users = systemUsers;

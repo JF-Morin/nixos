@@ -14,6 +14,9 @@
         "nvidia-drm.fbdev=1"
         "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     ];
+    boot.extraModprobeConfig = ''
+        options nvidia NVreg_RegistryDwords="PowerMizerEnable=0x1;PerfLevelSrc=0x2222;PowerMizerLevel=0x1;PowerMizerDefaultAC=0x1"
+    '';
 
 
     services.xserver.videoDrivers = ["nvidia"];
@@ -48,6 +51,11 @@
         # Tells GLX (OpenGL Extension to the X Window System) to use NVIDIA's hardware vendor library.
         # Prevents applications from falling back to software rendering or integrated graphics.
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+        # Disable G-Sync/VRR at the driver level to prevent black screen flashes on Wayland.
+        # VRR is also disabled in hyprland.conf (vrr = 0).
+        __GL_GSYNC_ALLOWED = "0";
+        __GL_VRR_ALLOWED = "0";
 
     };
 }

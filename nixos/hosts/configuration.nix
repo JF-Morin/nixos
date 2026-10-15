@@ -105,6 +105,17 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
+    networking.firewall = {
+        allowedTCPPorts = [ 7236 7250 ];
+        allowedUDPPorts = [ 7236 5353 ];
+    };
+
+    services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+    };
+
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

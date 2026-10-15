@@ -1,4 +1,8 @@
-{ config, pkgs, inputs, user, sysConfig, ... }:
+{ config, pkgs,nixpkgs-unstable, inputs, user, sysConfig, ... }:
+let
+  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
+in 
 
 {
     #################################################
@@ -37,6 +41,7 @@
         firefox
         blender
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        gnome-network-displays # Miracast
 
         # Terminal
         yazi # Terminal file eplorer
@@ -45,7 +50,7 @@
         #nerdfonts   # Fonts
         font-awesome # Fonts
         ghostty # Terminal
-        tmux # Terminal multiplexer
+        pkgs-unstable.herdr
         bat # Like cat, but better
         stow # Link manager
         #zsh # Shell
@@ -56,16 +61,14 @@
 
         # Development
         neovim
-        vscodium
         docker
         python314
         python313Packages.pip        
         rustc
         cargo
-        go
-        zig
+        dotnet-sdk_11
+        netcoredbg
         nodejs_26
-        bun
         gcc # Required for treesitter?
         gnumake # Required for treesitter?
 
@@ -82,16 +85,18 @@
         #marksman
         nil
         nixd
-        vscode-json-languageserver
+        roslyn-ls
         sqls
         svelte-language-server
         tailwindcss-language-server
         typescript-language-server
         vscode-extensions.rust-lang.rust-analyzer
+        vscode-json-languageserver
         yaml-language-server
         zls
         # Formatter
         nixfmt-classic
+        csharpier
 
 
         # Networking
@@ -110,6 +115,10 @@
         curl
         imagemagick
         webp-pixbuf-loader
+        playerctl
+
+        # AI tool's
+        claude-code
 
         # Hyprland
         dunst # Notifications
