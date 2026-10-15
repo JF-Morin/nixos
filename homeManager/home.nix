@@ -38,7 +38,7 @@ in
         steam
         libreoffice
         kicad
-        firefox
+        #firefox
         blender
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         gnome-network-displays # Miracast
@@ -102,7 +102,7 @@ in
         # Networking
         tailscale # VPN service
         nmap # Network mapping
-        protonvpn-gui # Proton VPN
+        proton-vpn # Proton VPN
 
         # Tools
         flatpak
@@ -159,6 +159,29 @@ in
 
     gtk.enable = true;
     stylix.targets.gtk.enable = true;
+
+    xdg.mimeApps = {
+        enable = true;
+        defaultApplications = {
+            # Web / Http
+            "text/html" = "zen.desktop";
+            "x-scheme-handler/http" = "zen.desktop";
+            "x-scheme-handler/https" = "zen.desktop";
+            "x-scheme-handler/about" = "zen.desktop";
+            "x-scheme-handler/unknown" = "zen.desktop";
+
+            # PDFs
+            "application/pdf" = "zen.desktop";
+
+            # Image files   
+            "image/png" = "zen.desktop";
+            "image/jpeg" = "zen.desktop";
+            "image/webp" = "zen.desktop";
+            "image/gif" = "zen.desktop";
+            "image/svg+xml" = "zen.desktop";
+            "image/avif" = "zen.desktop";
+        };
+    };
 
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

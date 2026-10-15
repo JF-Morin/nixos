@@ -1,0 +1,105 @@
+warning: Git tree '/home/jf/Projects/nixos' is dirty
+building the system configuration...
+warning: Git tree '/home/jf/Projects/nixos' is dirty
+evaluation warning: nixfmt-classic is deprecated and unmaintained. We recommend switching to nixfmt.
+evaluation warning: nixfmt-classic is deprecated and unmaintained. We recommend switching to nixfmt.
+evaluation warning: 'protonvpn-gui' has been renamed to/replaced by 'proton-vpn'
+evaluation warning: jf profile: The option `programs.git.aliases' defined in `/nix/store/a5mlcn87mvb32jrp5l5m7sc8f63n31pc-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings.alias'.
+evaluation warning: jf profile: The option `programs.git.userEmail' defined in `/nix/store/a5mlcn87mvb32jrp5l5m7sc8f63n31pc-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings.user.email'.
+evaluation warning: jf profile: The option `programs.git.userName' defined in `/nix/store/a5mlcn87mvb32jrp5l5m7sc8f63n31pc-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings.user.name'.
+evaluation warning: jf profile: The option `programs.git.extraConfig' defined in `/nix/store/a5mlcn87mvb32jrp5l5m7sc8f63n31pc-source/homeManager/modules/dev/git.nix' has been renamed to `programs.git.settings'.
+these 14 derivations will be built:
+  /nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv
+  /nix/store/1irzyhh1jix92gz8f7bda97gn6vjcb4v-firefox-152.0.1.drv
+  /nix/store/x4p7xlikz8f9np7q8kd31dpqnjikr8hp-inkscape-1.4.4.drv
+  /nix/store/mjjvszak03zk6z58k2ws2yksarfkcl4j-inkscape-with-extensions-1.4.4.drv
+  /nix/store/iyr232zaxv687604fyafdamyqgxlm0qg-home-manager-path.drv
+  /nix/store/6sadml0gxmf8z5kwzvpqhndbjrgj03i1-user-environment.drv
+  /nix/store/fn8fl38h5jz9sgc774a9jh22432ij09y-hm_fontconfigconf.d10hmfonts.conf.drv
+  /nix/store/xpbl4sr3q9vpjpidlzcz86y94s8qbhpn-home-manager-files.drv
+  /nix/store/qdlq26vaa8j8fy39845b0phcq0ljgidp-home-manager-generation.drv
+  /nix/store/xvbarf60ccvfmf0zmpjbgw1nb85grvqw-unit-home-manager-jf.service.drv
+  /nix/store/sczh9cr4p21q5fmqki2dkb9vir2flwk1-system-units.drv
+  /nix/store/7ml3h4xj3s219ri1k2jgg4y23a0arqs2-etc.drv
+  /nix/store/0x28s6804alixx7lm42icvhl7ihmciiy-activate.drv
+  /nix/store/1l50d4lix5094bkx87ilhbhdknz3hkn6-nixos-system-JF-laptop-26.05.20260620.af49492.drv
+building '/nix/store/x4p7xlikz8f9np7q8kd31dpqnjikr8hp-inkscape-1.4.4.drv'...
+building '/nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv'...
+^[[B^[[D^[[D^[[D^[[A^[[D^[[D^[[A^[[D^[[D^[[Bbuilding '/nix/store/mjjvszak03zk6z58k2ws2yksarfkcl4j-inkscape-with-extensions-1.4.4.drv'...
+error: Cannot build '/nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv'.
+       Reason: builder failed with exit code 2.
+       Output paths:
+         /nix/store/7sxzz14zijqjc5ld6x8dp5wxdwwb1jkc-firefox-unwrapped-152.0.1
+         /nix/store/kravh6nmpxm2dw9axqr5775li5wlb0j8-firefox-unwrapped-152.0.1-symbols
+         /nix/store/m6kqx49brakjawp9j4asdvlaaahpn2rn-firefox-unwrapped-152.0.1-debug
+       Last 25 log lines:
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o fwd_txfm_ssse3_x86_64.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/fwd_txfm_ssse3_x86_64.asm
+       > /nix/store/arwxx05v5p0lh75a6qx7h8dsp6pil31n-clang-wrapper-21.1.8/bin/clang++ -std=gnu++20 -o winnmfmt.o -c  -I/build/firefox-152.0.1/objdir/dist/system_wrappers -include /build/firefox-152.0.1/config/gcc_hidden.h -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-strong -fstack-clash-protection -fstrict-flex-arrays=1 -DNDEBUG=1 -DTRIMMED=1 -DU_I18N_IMPLEMENTATION -D_LIBCPP_DISABLE_DEPRECATION_WARNINGS -DU_USING_ICU_NAMESPACE=0 -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 -DU_HIDE_OBSOLETE_UTF_OLD_H=1 -DUCONFIG_NO_LEGACY_CONVERSION -DUCONFIG_NO_TRANSLITERATION -DUCONFIG_NO_REGULAR_EXPRESSIONS -DUCONFIG_NO_BREAK_ITERATION -DUCONFIG_NO_IDNA -DUCONFIG_NO_MF2 -DUCONFIG_NO_NORMALIZATION -DUCONFIG_NO_COLLATION -DU_CHARSET_IS_UTF8 -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit -DU_ENABLE_DYLOAD=0 -I/build/firefox-152.0.1/config/external/icu/i18n -I/build/firefox-152.0.1/objdir/config/external/icu/i18n -I/build/firefox-152.0.1/intl/icu/source/common -I/build/firefox-152.0.1/mfbt/double-conversion -I/build/firefox-152.0.1/objdir/dist/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/6wdiwrh7j4h8ml1rvnaiflwc3738nr9h-nss-3.125-dev/include/nss -I/build/firefox-152.0.1/objdir/dist/include/nss -I/nix/store/qd3gla6sn63is90462qdfqwsvppkrhby-libpng-apng-1.6.56-dev/include/libpng16 -I/nix/store/h7ik0g1xxayy0z8h27zbvrgmac63irgs-zlib-1.3.2-dev/include -I/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman-1 -DMOZILLA_CLIENT -include /build/firefox-152.0.1/objdir/mozilla-config.h -fno-rtti -pthread -fno-sized-deallocation -fno-aligned-new -ffunction-sections -fdata-sections -fno-math-errno -fno-exceptions -fdiagnostics-absolute-paths -fPIC -gdwarf-4 -gsimple-template-names --start-no-unused-arguments -mllvm=-dwarf-linkage-names=Abstract --end-no-unused-arguments -O3 -fomit-frame-pointer -funwind-tables -Wall -Wbitfield-enum-conversion -Wempty-body -Wformat-type-confusion -Wignored-qualifiers -Wpointer-arith -Wshadow-field-in-constructor-modified -Wsign-compare -Wtautological-constant-in-range-compare -Wtype-limits -Wno-error=tautological-type-limit-compare -Wunreachable-code -Wunreachable-code-return -Wunused-but-set-parameter -Wno-invalid-offsetof -Wclass-varargs -Wempty-init-stmt -Wfloat-overflow-conversion -Wfloat-zero-conversion -Wloop-analysis -Wno-range-loop-analysis -Wno-deprecated-anon-enum-enum-conversion -Wno-deprecated-enum-enum-conversion -Wdeprecated-literal-operator -Winvalid-utf8 -Wcomma -Wimplicit-fallthrough -Wstring-conversion -Wno-inline-new-delete -Wno-error=deprecated-declarations -Wno-error=array-bounds -Wno-error=free-nonheap-object -Wno-error=atomic-alignment -Wno-error=deprecated-builtins -Wformat -Wformat-security -Wno-psabi -Wthread-safety -Wno-error=builtin-macro-redefined -Wno-vla-cxx-extension -Wno-unknown-warning-option -Wno-character-conversion -frtti -Wno-comma -Wno-implicit-const-int-float-conversion -Wno-macro-redefined -Wno-microsoft-include -Wno-tautological-unsigned-enum-zero-compare -Wno-unreachable-code-loop-increment -Wno-unreachable-code-return -fno-strict-aliasing -ffp-contract=off -DNS_FREE_PERMANENT_DATA=1 -fprofile-generate -MD -MP -MF .deps/winnmfmt.o.pp   /build/firefox-152.0.1/intl/icu/source/i18n/winnmfmt.cpp
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o highbd_intrapred_asm_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/highbd_intrapred_asm_sse2.asm
+       > /nix/store/arwxx05v5p0lh75a6qx7h8dsp6pil31n-clang-wrapper-21.1.8/bin/clang++ -std=gnu++20 -o wintzimpl.o -c  -I/build/firefox-152.0.1/objdir/dist/system_wrappers -include /build/firefox-152.0.1/config/gcc_hidden.h -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-strong -fstack-clash-protection -fstrict-flex-arrays=1 -DNDEBUG=1 -DTRIMMED=1 -DU_I18N_IMPLEMENTATION -D_LIBCPP_DISABLE_DEPRECATION_WARNINGS -DU_USING_ICU_NAMESPACE=0 -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 -DU_HIDE_OBSOLETE_UTF_OLD_H=1 -DUCONFIG_NO_LEGACY_CONVERSION -DUCONFIG_NO_TRANSLITERATION -DUCONFIG_NO_REGULAR_EXPRESSIONS -DUCONFIG_NO_BREAK_ITERATION -DUCONFIG_NO_IDNA -DUCONFIG_NO_MF2 -DUCONFIG_NO_NORMALIZATION -DUCONFIG_NO_COLLATION -DU_CHARSET_IS_UTF8 -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit -DU_ENABLE_DYLOAD=0 -I/build/firefox-152.0.1/config/external/icu/i18n -I/build/firefox-152.0.1/objdir/config/external/icu/i18n -I/build/firefox-152.0.1/intl/icu/source/common -I/build/firefox-152.0.1/mfbt/double-conversion -I/build/firefox-152.0.1/objdir/dist/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/6wdiwrh7j4h8ml1rvnaiflwc3738nr9h-nss-3.125-dev/include/nss -I/build/firefox-152.0.1/objdir/dist/include/nss -I/nix/store/qd3gla6sn63is90462qdfqwsvppkrhby-libpng-apng-1.6.56-dev/include/libpng16 -I/nix/store/h7ik0g1xxayy0z8h27zbvrgmac63irgs-zlib-1.3.2-dev/include -I/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman-1 -DMOZILLA_CLIENT -include /build/firefox-152.0.1/objdir/mozilla-config.h -fno-rtti -pthread -fno-sized-deallocation -fno-aligned-new -ffunction-sections -fdata-sections -fno-math-errno -fno-exceptions -fdiagnostics-absolute-paths -fPIC -gdwarf-4 -gsimple-template-names --start-no-unused-arguments -mllvm=-dwarf-linkage-names=Abstract --end-no-unused-arguments -O3 -fomit-frame-pointer -funwind-tables -Wall -Wbitfield-enum-conversion -Wempty-body -Wformat-type-confusion -Wignored-qualifiers -Wpointer-arith -Wshadow-field-in-constructor-modified -Wsign-compare -Wtautological-constant-in-range-compare -Wtype-limits -Wno-error=tautological-type-limit-compare -Wunreachable-code -Wunreachable-code-return -Wunused-but-set-parameter -Wno-invalid-offsetof -Wclass-varargs -Wempty-init-stmt -Wfloat-overflow-conversion -Wfloat-zero-conversion -Wloop-analysis -Wno-range-loop-analysis -Wno-deprecated-anon-enum-enum-conversion -Wno-deprecated-enum-enum-conversion -Wdeprecated-literal-operator -Winvalid-utf8 -Wcomma -Wimplicit-fallthrough -Wstring-conversion -Wno-inline-new-delete -Wno-error=deprecated-declarations -Wno-error=array-bounds -Wno-error=free-nonheap-object -Wno-error=atomic-alignment -Wno-error=deprecated-builtins -Wformat -Wformat-security -Wno-psabi -Wthread-safety -Wno-error=builtin-macro-redefined -Wno-vla-cxx-extension -Wno-unknown-warning-option -Wno-character-conversion -frtti -Wno-comma -Wno-implicit-const-int-float-conversion -Wno-macro-redefined -Wno-microsoft-include -Wno-tautological-unsigned-enum-zero-compare -Wno-unreachable-code-loop-increment -Wno-unreachable-code-return -fno-strict-aliasing -ffp-contract=off -DNS_FREE_PERMANENT_DATA=1 -fprofile-generate -MD -MP -MF .deps/wintzimpl.o.pp   /build/firefox-152.0.1/intl/icu/source/i18n/wintzimpl.cpp
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o highbd_sad4d_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/highbd_sad4d_sse2.asm
+       > /nix/store/arwxx05v5p0lh75a6qx7h8dsp6pil31n-clang-wrapper-21.1.8/bin/clang++ -std=gnu++20 -o zonemeta.o -c  -I/build/firefox-152.0.1/objdir/dist/system_wrappers -include /build/firefox-152.0.1/config/gcc_hidden.h -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-strong -fstack-clash-protection -fstrict-flex-arrays=1 -DNDEBUG=1 -DTRIMMED=1 -DU_I18N_IMPLEMENTATION -D_LIBCPP_DISABLE_DEPRECATION_WARNINGS -DU_USING_ICU_NAMESPACE=0 -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 -DU_HIDE_OBSOLETE_UTF_OLD_H=1 -DUCONFIG_NO_LEGACY_CONVERSION -DUCONFIG_NO_TRANSLITERATION -DUCONFIG_NO_REGULAR_EXPRESSIONS -DUCONFIG_NO_BREAK_ITERATION -DUCONFIG_NO_IDNA -DUCONFIG_NO_MF2 -DUCONFIG_NO_NORMALIZATION -DUCONFIG_NO_COLLATION -DU_CHARSET_IS_UTF8 -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit -DU_ENABLE_DYLOAD=0 -I/build/firefox-152.0.1/config/external/icu/i18n -I/build/firefox-152.0.1/objdir/config/external/icu/i18n -I/build/firefox-152.0.1/intl/icu/source/common -I/build/firefox-152.0.1/mfbt/double-conversion -I/build/firefox-152.0.1/objdir/dist/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/l958ajh8ym4dwj27f903fk12ky94bcqc-nspr-4.39-dev/include -I/nix/store/6wdiwrh7j4h8ml1rvnaiflwc3738nr9h-nss-3.125-dev/include/nss -I/build/firefox-152.0.1/objdir/dist/include/nss -I/nix/store/qd3gla6sn63is90462qdfqwsvppkrhby-libpng-apng-1.6.56-dev/include/libpng16 -I/nix/store/h7ik0g1xxayy0z8h27zbvrgmac63irgs-zlib-1.3.2-dev/include -I/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman-1 -DMOZILLA_CLIENT -include /build/firefox-152.0.1/objdir/mozilla-config.h -fno-rtti -pthread -fno-sized-deallocation -fno-aligned-new -ffunction-sections -fdata-sections -fno-math-errno -fno-exceptions -fdiagnostics-absolute-paths -fPIC -gdwarf-4 -gsimple-template-names --start-no-unused-arguments -mllvm=-dwarf-linkage-names=Abstract --end-no-unused-arguments -O3 -fomit-frame-pointer -funwind-tables -Wall -Wbitfield-enum-conversion -Wempty-body -Wformat-type-confusion -Wignored-qualifiers -Wpointer-arith -Wshadow-field-in-constructor-modified -Wsign-compare -Wtautological-constant-in-range-compare -Wtype-limits -Wno-error=tautological-type-limit-compare -Wunreachable-code -Wunreachable-code-return -Wunused-but-set-parameter -Wno-invalid-offsetof -Wclass-varargs -Wempty-init-stmt -Wfloat-overflow-conversion -Wfloat-zero-conversion -Wloop-analysis -Wno-range-loop-analysis -Wno-deprecated-anon-enum-enum-conversion -Wno-deprecated-enum-enum-conversion -Wdeprecated-literal-operator -Winvalid-utf8 -Wcomma -Wimplicit-fallthrough -Wstring-conversion -Wno-inline-new-delete -Wno-error=deprecated-declarations -Wno-error=array-bounds -Wno-error=free-nonheap-object -Wno-error=atomic-alignment -Wno-error=deprecated-builtins -Wformat -Wformat-security -Wno-psabi -Wthread-safety -Wno-error=builtin-macro-redefined -Wno-vla-cxx-extension -Wno-unknown-warning-option -Wno-character-conversion -frtti -Wno-comma -Wno-implicit-const-int-float-conversion -Wno-macro-redefined -Wno-microsoft-include -Wno-tautological-unsigned-enum-zero-compare -Wno-unreachable-code-loop-increment -Wno-unreachable-code-return -fno-strict-aliasing -ffp-contract=off -DNS_FREE_PERMANENT_DATA=1 -fprofile-generate -MD -MP -MF .deps/zonemeta.o.pp   /build/firefox-152.0.1/intl/icu/source/i18n/zonemeta.cpp
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o highbd_sad_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/highbd_sad_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o highbd_subpel_variance_impl_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/highbd_subpel_variance_impl_sse2.asm
+       > make[3]: Leaving directory '/build/firefox-152.0.1/objdir/config/external/icu/i18n'
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o highbd_variance_impl_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/highbd_variance_impl_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o intrapred_asm_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/intrapred_asm_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o quantize_ssse3_x86_64.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/quantize_ssse3_x86_64.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o sad4d_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/sad4d_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o sad_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/sad_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o ssim_sse2_x86_64.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/ssim_sse2_x86_64.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o subpel_variance_ssse3.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/subpel_variance_ssse3.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o subtract_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/aom_dsp/x86/subtract_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o av1_quantize_ssse3_x86_64.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/av1/encoder/x86/av1_quantize_ssse3_x86_64.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o dct_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/av1/encoder/x86/dct_sse2.asm
+       > /nix/store/jhkikmczj9nfn48v8m8pgfv92w708cfh-nasm-3.01/bin/nasm -o error_sse2.o -f elf64 -F dwarf -I/build/firefox-152.0.1/media/libaom/config/linux/x64/ -I./ -I/build/firefox-152.0.1/third_party/aom/   /build/firefox-152.0.1/third_party/aom/av1/encoder/x86/error_sse2.asm
+       > make[3]: Leaving directory '/build/firefox-152.0.1/objdir/media/libaom'
+       > make[2]: Leaving directory '/build/firefox-152.0.1/objdir'
+       > make[1]: *** [/build/firefox-152.0.1/config/recurse.mk:34: compile] Error 2
+       > make[1]: Leaving directory '/build/firefox-152.0.1/objdir'
+       > make: *** [/build/firefox-152.0.1/config/rules.mk:357: default] Error 2
+       For full logs, run:
+         nix log /nix/store/5wkjdbg178hpmx7s4iy0626jnx37hgvi-firefox-unwrapped-152.0.1.drv
+error: Cannot build '/nix/store/1irzyhh1jix92gz8f7bda97gn6vjcb4v-firefox-152.0.1.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/841p28cx36qdhxvryqsnm5p9di6blx3a-firefox-152.0.1
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/iyr232zaxv687604fyafdamyqgxlm0qg-home-manager-path.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/06zcibqn3szi9xah7jh8v3braiyqakb0-home-manager-path
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/fn8fl38h5jz9sgc774a9jh22432ij09y-hm_fontconfigconf.d10hmfonts.conf.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/4nn3q8709jbjnmnzy29sr77vd5bpk06l-hm_fontconfigconf.d10hmfonts.conf
+error: Cannot build '/nix/store/qdlq26vaa8j8fy39845b0phcq0ljgidp-home-manager-generation.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/0j9c7z1594rfx3gg8951h7dijx7yq9yh-home-manager-generation
+error: Cannot build '/nix/store/6sadml0gxmf8z5kwzvpqhndbjrgj03i1-user-environment.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/nrng4cl6dadxgmcrkvadmfc84kxhkj2a-user-environment
+error: Build failed due to failed dependency
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/7ml3h4xj3s219ri1k2jgg4y23a0arqs2-etc.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/1wzk2xi7y54fcqr1zc52320hldzjr36v-etc
+error: Cannot build '/nix/store/xvbarf60ccvfmf0zmpjbgw1nb85grvqw-unit-home-manager-jf.service.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/qkni8vbr2kkq3ykir92qmqwh11r13yk9-unit-home-manager-jf.service
+error: Build failed due to failed dependency
+error: Cannot build '/nix/store/0x28s6804alixx7lm42icvhl7ihmciiy-activate.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/4pr33l13agqnimrlbd0whmbzg5lm3524-activate
+error: Cannot build '/nix/store/1l50d4lix5094bkx87ilhbhdknz3hkn6-nixos-system-JF-laptop-26.05.20260620.af49492.drv'.
+       Reason: 1 dependency failed.
+       Output paths:
+         /nix/store/dhgrcs5bva5xkxjrz3q4p152dvg080l2-nixos-system-JF-laptop-26.05.20260620.af49492
+error: Build failed due to failed dependency
+Command 'nix --extra-experimental-features 'nix-command flakes' build --print-out-paths '.#nixosConfigurations."laptop".config.system.build.toplevel' --no-link' returned non-zero exit status 1.

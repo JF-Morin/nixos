@@ -34,7 +34,7 @@
             difftool.prompt = false;
         };
 
-        aliases = {
+        settings.aliases = {
             # Add
             aa = "add --all";
             add = "add -i";
