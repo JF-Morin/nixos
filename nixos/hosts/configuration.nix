@@ -86,7 +86,12 @@
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         targets.gtk.enable = true;
         targets.gnome.enable = true;
-
+        fonts = {
+            monospace = {
+                package = pkgs.nerd-fonts.jetbrains-mono;
+                name = "JetBrainsMono Nerd Font Mono";
+            };
+        };
     };
 
     programs.dconf.enable = true;

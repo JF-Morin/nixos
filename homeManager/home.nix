@@ -17,9 +17,10 @@ in
     # Import modules
     #################################################
     imports = [
-        ./modules/dev 
+        ./modules/dev
         ./modules/terminal
         ./modules/wm
+        ./modules/apps
     ];
 
     #################################################
@@ -45,18 +46,15 @@ in
 
         # Terminal
         yazi # Terminal file eplorer
-        oh-my-posh # Command line graphic
         lazygit # Git TUI
         #nerdfonts   # Fonts
         font-awesome # Fonts
-        ghostty # Terminal
         pkgs-unstable.herdr
         bat # Like cat, but better
         stow # Link manager
         #zsh # Shell
         fastfetch # System info
         zoxide # Smart 'cd' replacement
-        eza # Better LS command and Tree command
         ripgrep-all # Ripgrep, with PDF, doc, zip etc
 
         # Development
@@ -95,7 +93,7 @@ in
         yaml-language-server
         zls
         # Formatter
-        nixfmt-classic
+        nixfmt
         csharpier
 
 

@@ -3,9 +3,11 @@
 {
     programs.git = {
         enable = true;
-        userName = "JF-Morin";
-        userEmail = user.email; 
-        extraConfig = {
+        settings = {
+            user = {
+                name = "JF-Morin";
+                email = user.email;
+            };
             init.defaultBranch = "main";
             core.editor = "nvim";
             web.browser = "brave";
@@ -29,12 +31,9 @@
                     untracked = "red bold";
                 };
             };
-
             diff.tool = "vimdiff";
             difftool.prompt = false;
-        };
-
-        settings.aliases = {
+            aliases = {
             # Add
             aa = "add --all";
             add = "add -i";
@@ -84,6 +83,7 @@
             # Status
             st = "status";
 
+        };
         };
     };
 }

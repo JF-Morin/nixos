@@ -8,8 +8,8 @@
             size = 1000;
         };
         initContent = ''
-            eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/jf_morin.omp.json)"
             eval "$(zoxide init zsh)"
+            eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/jf_morin.omp.json)"
         '';
         shellAliases = {
             # Nixos, flakes and home-manager
