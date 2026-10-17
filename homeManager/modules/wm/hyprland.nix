@@ -3,9 +3,11 @@
 {
     wayland.windowManager.hyprland = {
         enable = true;
-        # settings intentionally empty — full config is in xdg.configFile below.
-        # HM 26.05 converts settings to hyprland.lua which Hyprland only uses
-        # when hyprland.conf is absent; we own hyprland.conf directly instead.
+        # HM 26.05 defaults configType to "lua" for stateVersion 26.05, which
+        # generates hyprland.lua. Hyprland 0.46+ prefers .lua over .conf when
+        # both exist, so our full config in hyprland.conf would be silently ignored.
+        # Force "hyprlang" so HM never generates hyprland.lua.
+        configType = "hyprlang";
     };
 
     xdg.configFile."hypr/hyprland.conf" = {
@@ -35,8 +37,10 @@
             #################
             ### AUTOSTART ###
             #################
-            exec-once = systemctl --user import-environment PATH WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-            exec-once = noctalia & hypridle
+            exec-once = dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+            exec-once = systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target
+            exec-once = noctalia
+            exec-once = hypridle
 
 
             #############################

@@ -3,11 +3,34 @@
 {
     programs.git = {
         enable = true;
-        settings = {
-            user = {
-                name = "JF-Morin";
-                email = user.email;
-            };
+        userName = "JF-Morin";
+        userEmail = user.email;
+        aliases = {
+            aa = "add --all";
+            add = "add -i";
+            br = "branch";
+            bra = "branch -a";
+            brd = "branch -d";
+            brr = "branch -r";
+            ci = "commit";
+            cim = "commit -m";
+            cl = "clone";
+            f = "fetch";
+            lg = "log";
+            lg2 = "log --oneline --graph --decorate";
+            m = "merge";
+            ma = "merge --abort";
+            mc = "merge --continue";
+            co = "checkout";
+            cob = "checkout -b";
+            ps = "push";
+            psu = "push -u";
+            pl = "pull";
+            rb = "rebase";
+            rst = "reset";
+            st = "status";
+        };
+        extraConfig = {
             init.defaultBranch = "main";
             core.editor = "nvim";
             web.browser = "brave";
@@ -33,57 +56,6 @@
             };
             diff.tool = "vimdiff";
             difftool.prompt = false;
-            aliases = {
-            # Add
-            aa = "add --all";
-            add = "add -i";
-
-            # Branch
-            br = "branch";
-            bra = "branch -a";
-            brd = "branch -d";
-            brr = "branch -r";
-
-            # Commit
-            ci = "commit";
-            cim = "commit -m";
-
-            # Clone
-            cl = "clone";
-
-            # Fetch 
-            f = "fetch";
-
-            # Log
-            lg = "log";
-            lg2 = "log --oneline --graph --decorate";
-
-            # Merge
-            m = "merge";
-            ma = "merge --abort";
-            mc = "merge --continue";
-
-            # Checkout
-            co = "checkout";
-            cob = "checkout -b";
-
-            # Push
-            ps = "push";
-            psu = "push -u";
-
-            # Pull
-            pl = "pull";
-
-            # Rebase 
-            rb = "rebase";
-
-            # Reset
-            rst = "reset";
-
-            # Status
-            st = "status";
-
-        };
         };
     };
 }
