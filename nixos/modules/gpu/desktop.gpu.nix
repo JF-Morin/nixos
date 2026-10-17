@@ -12,7 +12,6 @@
     boot.extraModulePackages = [ config.boot.kernelPackages.nvidiaPackages.legacy_580 ];
     boot.kernelParams = [
         "nvidia-drm.fbdev=1"
-        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     ];
     boot.extraModprobeConfig = ''
         options nvidia NVreg_RegistryDwords="PowerMizerEnable=0x1;PerfLevelSrc=0x2222;PowerMizerLevel=0x1;PowerMizerDefaultAC=0x1"
@@ -57,5 +56,16 @@
         __GL_GSYNC_ALLOWED = "0";
         __GL_VRR_ALLOWED = "0";
 
+    };
+
+    # The SDDM display-manager service runs BEFORE any user session, so
+    # sessionVariables above are not available to Weston (SDDM's Wayland
+    # compositor) or the QML greeter. These duplicated NVIDIA vars ensure
+    # the NVIDIA DRM/GBM stack is properly initialised at the login screen,
+    # which fixes QML theme rendering and cursor plane support.
+    systemd.services.display-manager.environment = {
+        GBM_BACKEND               = "nvidia-drm";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        LIBVA_DRIVER_NAME         = "nvidia";
     };
 }

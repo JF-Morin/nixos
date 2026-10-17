@@ -8,6 +8,9 @@
         # both exist, so our full config in hyprland.conf would be silently ignored.
         # Force "hyprlang" so HM never generates hyprland.lua.
         configType = "hyprlang";
+        # Config is managed via xdg.configFile below; UWSM (withUWSM = true)
+        # handles session targets, so HM's own systemd wiring is not needed.
+        systemd.enable = false;
     };
 
     xdg.configFile."hypr/hyprland.conf" = {
@@ -41,6 +44,7 @@
             exec-once = systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target
             exec-once = noctalia
             exec-once = hypridle
+            exec-once = sleep 3 && noctalia msg templates-apply
 
 
             #############################

@@ -42,8 +42,6 @@ in
         #firefox
         blender
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-        gnome-network-displays # Miracast
-
         # Terminal
         yazi # Terminal file eplorer
         lazygit # Git TUI

@@ -58,10 +58,10 @@
                     "credentials=/etc/nixos/smb-secrets/smb-secrets-${user.username}"
                     "x-systemd.automount"
                     "noauto"
-                    "user"
-                    "x-systemd.idle-timeout=60"
-                        #"uid=${userUID}"
-                        #"gid=${userGID}"
+                    "_netdev"
+                    "x-systemd.requires=network-online.target"
+                    "x-systemd.after=network-online.target"
+                    "x-systemd.mount-timeout=30"
                     "uid=${user.username}"
                     "gid=users"
                     "forceuid"
@@ -109,11 +109,7 @@
     #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # Enable networking
     networking.networkmanager.enable = true;
-
-    networking.firewall = {
-        allowedTCPPorts = [ 7236 7250 ];
-        allowedUDPPorts = [ 7236 5353 ];
-    };
+    systemd.services.NetworkManager-wait-online.enable = true;
 
     services.avahi = {
         enable = true;
