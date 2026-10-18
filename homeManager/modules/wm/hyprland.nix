@@ -161,6 +161,7 @@
             bind = $mainMod, C, exec, $control_center
             bind = $mainMod, B, exec, $browser
             bind = $mainMod, T, exec, $terminal
+            bind = $mainMod, H, exec, $terminal -e herdr
             bind = $mainMod, Y, exec, $terminal -e yazi
             bind = $mainMod, E, exec, $fileManager
             bind = $mainMod, F, togglefloating,
