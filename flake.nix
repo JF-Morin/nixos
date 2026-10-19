@@ -86,7 +86,6 @@
                         {
                             home-manager.useGlobalPkgs = true;
                             home-manager.useUserPackages = true;
-                            home-manager.backupFileExtension = "backup";
 
                             # Creating nome-manager users dynamically
                             home-manager.users = builtins.listToAttrs (map (user:

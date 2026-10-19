@@ -240,7 +240,7 @@
             bindm = $mainMod, mouse:272, movewindow
             bindm = $mainMod, mouse:273, resizewindow
 
-            bind = $mainMod SHIFT, A, exec, $script_switch_audio_sink
+            bind = $mainMod SHIFT, A, exec, $script_switch_audio_sink && noctalia msg panel-toggle jf/audio-switcher:panel
 
 
             ##############################

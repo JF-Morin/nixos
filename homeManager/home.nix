@@ -109,6 +109,7 @@ in
         btop # Interactive process viewer
         wget
         curl
+        glow # Terminal markdown viewer
         imagemagick
         webp-pixbuf-loader
         playerctl
@@ -156,6 +157,9 @@ in
     gtk.enable = true;
     stylix.targets.gtk.enable = true;
     stylix.targets.hyprland.enable = false;
+
+    xdg.configFile."gtk-3.0/gtk.css".force = true;
+    xdg.configFile."gtk-4.0/gtk.css".force = true;
 
     xdg.mimeApps = {
         enable = true;

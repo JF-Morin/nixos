@@ -38,4 +38,10 @@ in
     Path.PathChanged = "%h/.local/state/noctalia/settings.toml";
     Install.WantedBy = [ "default.target" ];
   };
+
+  # Audio Switcher plugin
+  home.file.".local/share/noctalia/plugins/jf/audio-switcher/plugin.toml".source =
+    ./noctalia-plugins/audio-switcher/plugin.toml;
+  home.file.".local/share/noctalia/plugins/jf/audio-switcher/panel.luau".source =
+    ./noctalia-plugins/audio-switcher/panel.luau;
 }
