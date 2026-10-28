@@ -44,7 +44,7 @@
             exec-once = systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target
             exec-once = noctalia
             exec-once = hypridle
-            exec-once = sleep 3 && noctalia msg templates-apply
+            exec-once = sleep 3 && noctalia msg templates-apply && noctalia msg greeter-sync
 
 
             #############################

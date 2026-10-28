@@ -62,6 +62,7 @@ in
         python313Packages.pip        
         rustc
         cargo
+        sqlite
         dotnet-sdk_11
         netcoredbg
         nodejs_26
@@ -154,12 +155,27 @@ in
         enable = true;
     };
 
-    gtk.enable = true;
-    stylix.targets.gtk.enable = true;
-    stylix.targets.hyprland.enable = false;
+    gtk = {
+        enable = true;
+        theme = {
+            name    = "adw-gtk3";
+            package = pkgs.adw-gtk3;
+        };
+        font = {
+            name = "JetBrainsMono Nerd Font Mono";
+            size = 12;
+        };
+    };
 
-    xdg.configFile."gtk-3.0/gtk.css".force = true;
-    xdg.configFile."gtk-4.0/gtk.css".force = true;
+    # Delegate GTK color variables entirely to Noctalia's dynamic noctalia.css
+    xdg.configFile."gtk-3.0/gtk.css" = {
+        force = true;
+        text  = ''@import url("noctalia.css");'';
+    };
+    xdg.configFile."gtk-4.0/gtk.css" = {
+        force = true;
+        text  = ''@import url("noctalia.css");'';
+    };
 
     xdg.mimeApps = {
         enable = true;

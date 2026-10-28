@@ -19,12 +19,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        # Stylix
-        stylix = {
-            url = "github:danth/stylix/release-26.05";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         # Quickshell
         quickshell = {
             url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -36,9 +30,15 @@
             url = "github:noctalia-dev/noctalia";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        # Noctalia Greeter (separate project)
+        noctalia-greeter = {
+            url = "github:noctalia-dev/noctalia-greeter";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, quickshell, noctalia, ... } @inputs:
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, quickshell, noctalia, ... } @ inputs:
         let
             # --- Settings --- #
             allSystems = import ./config/systems.nix;
@@ -78,8 +78,11 @@
                         # Configuration (common config file)
                         ./nixos/hosts/configuration.nix
 
-                        # Stylix
-                        inputs.stylix.nixosModules.stylix
+                        # Noctalia shell
+                        inputs.noctalia.nixosModules.default
+
+                        # Noctalia Greeter (provides services.displayManager.noctalia-greeter)
+                        inputs.noctalia-greeter.nixosModules.default
 
                         # Home-Manager
                         home-manager.nixosModules.home-manager

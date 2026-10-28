@@ -17,7 +17,7 @@
         value = {
             isNormalUser = user.isNormalUser;
             description = user.description;
-            extraGroups = [ "networkmanager" ] ++ (if user.isAdmin then [ "wheel" ] else []);
+            extraGroups = [ "networkmanager" ] ++ (if user.isAdmin then [ "wheel" "docker" ] else []);
             shell = pkgs.${user.defaultShell};
         };
     }) sysConfig.users);
@@ -76,24 +76,6 @@
     ) sysConfig.users);
 
 
-    #####################################################
-    # Apply default style TODO: make it dynamic later
-    #####################################################
-    stylix = {
-        enable = true;
-        autoEnable = true;
-        image = ../../assets/wallpapers/wallpaper-1.png;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-        targets.gtk.enable = true;
-        targets.gnome.enable = true;
-        fonts = {
-            monospace = {
-                package = pkgs.nerd-fonts.jetbrains-mono;
-                name = "JetBrainsMono Nerd Font Mono";
-            };
-        };
-    };
-
     programs.dconf.enable = true;
     security.polkit.enable = true;
     services.dbus.enable = true;
@@ -120,6 +102,8 @@
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    virtualisation.docker.enable = true;
 
     # Enable flakes
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

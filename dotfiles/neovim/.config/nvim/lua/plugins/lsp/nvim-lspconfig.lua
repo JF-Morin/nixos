@@ -25,7 +25,7 @@ return {
         --lspconfig.eslint.setup({})
         lspconfig.gopls.setup({})
         lspconfig.html.setup({})
-        lspconfig.htmx.setup({})
+        lspconfig.htmx.setup({ filetypes = { "html" } })
         lspconfig.jsonls.setup({})
         lspconfig.ts_ls.setup({})
         lspconfig.lua_ls.setup({})
@@ -42,7 +42,6 @@ return {
         lspconfig.hydra_lsp.setup({})
         lspconfig.zls.setup({})
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
     end,
 }

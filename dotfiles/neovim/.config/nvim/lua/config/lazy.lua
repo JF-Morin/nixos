@@ -22,11 +22,15 @@ vim.opt.rtp:prepend(lazypath)
 --vim.g.maplocalleader = "\\"
 
 require('lazy').setup({
-    	spec = {
-        --{ 'echasnovski/mini.nvim', version = false },
-	{ 
-		import = "plugins"
-	},
+    spec = {
+        { import = "plugins.lsp" },
+        { import = "plugins.completion" },
+        { import = "plugins.syntax" },
+        { import = "plugins.ui" },
+        { import = "plugins.themes" },
+        { import = "plugins.editing" },
+        { import = "plugins.navigation" },
+        { import = "plugins.utils" },
     },
     checker = {
 	    enable = true

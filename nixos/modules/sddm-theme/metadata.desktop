@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=qylock-custom
-Description=Custom Qylock-inspired SDDM theme with Stylix colors
-Author=JF Morin
-License=MIT
-Type=sddm-theme
-MainScript=Main.qml
-ConfigFile=theme.conf
-QtVersion=6
