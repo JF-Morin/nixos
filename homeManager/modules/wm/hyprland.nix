@@ -33,7 +33,7 @@
             $session = noctalia msg panel-toggle session
             $control_center = noctalia msg panel-toggle control-center
             $browser = zen
-            $lock = hyprlock
+            $lock = noctalia msg session lock
             $script_switch_audio_sink = $HOME/Projects/nixos/scripts/switch_audio_sink.sh
 
 
@@ -43,7 +43,6 @@
             exec-once = dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
             exec-once = systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target
             exec-once = noctalia
-            exec-once = hypridle
             exec-once = sleep 3 && noctalia msg templates-apply && noctalia msg greeter-sync
 
 
