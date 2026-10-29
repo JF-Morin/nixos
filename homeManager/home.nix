@@ -49,52 +49,10 @@ in
         font-awesome # Fonts
         pkgs-unstable.herdr
         bat # Like cat, but better
-        stow # Link manager
         #zsh # Shell
         fastfetch # System info
         zoxide # Smart 'cd' replacement
         ripgrep-all # Ripgrep, with PDF, doc, zip etc
-
-        # Development
-        neovim
-        docker
-        python314
-        python313Packages.pip        
-        rustc
-        cargo
-        sqlite
-        dotnet-sdk_11
-        netcoredbg
-        nodejs_26
-        gcc # Required for treesitter?
-        gnumake # Required for treesitter?
-
-        # LSPs
-        bash-language-server
-        ccls
-        #csharp-ls
-        docker-language-server
-        emmet-language-server
-        gopls
-        htmx-lsp
-        lemminx
-        lua-language-server
-        #marksman
-        nil
-        nixd
-        roslyn-ls
-        sqls
-        svelte-language-server
-        tailwindcss-language-server
-        typescript-language-server
-        vscode-extensions.rust-lang.rust-analyzer
-        vscode-json-languageserver
-        yaml-language-server
-        zls
-        # Formatter
-        nixfmt
-        csharpier
-
 
         # Networking
         tailscale # VPN service
@@ -113,29 +71,14 @@ in
         glow # Terminal markdown viewer
         imagemagick
         webp-pixbuf-loader
-        playerctl
 
         # AI tool's
         claude-code
 
         # Hyprland
-        dunst # Notifications
-        libnotify # for notifications
-        rofi # app launcher
-        waybar # status bar
-        wl-clipboard # Clipboard
-        hyprshot # Screenshots
-        nautilus # File explorer => test vs thunar
-        wlogout
+        libnotify # for notifications (notify-send)
+        nautilus # File explorer
         pavucontrol
-
-        # Quickshell and dependencies
-        (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default.withModules [
-            pkgs.qt6.qtsvg
-            pkgs.qt6.qtimageformats
-            pkgs.qt6.qtmultimedia
-            pkgs.qt6.qt5compat
-        ])
 
         # Noctalia
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default

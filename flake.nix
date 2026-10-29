@@ -19,12 +19,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        # Quickshell
-        quickshell = {
-            url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         # Noctalia
         noctalia = {
             url = "github:noctalia-dev/noctalia";
@@ -38,7 +32,7 @@
         };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, quickshell, noctalia, ... } @ inputs:
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, ... } @ inputs:
         let
             # --- Settings --- #
             allSystems = import ./config/systems.nix;

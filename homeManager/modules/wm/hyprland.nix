@@ -167,6 +167,10 @@
             bind = $mainMod, P, pseudo,
             bind = $mainMod, L, exec, $lock
 
+            bind = , Print, exec, noctalia msg screenshot-region
+            bind = SHIFT, Print, exec, noctalia msg screenshot-fullscreen
+            bind = CTRL, Print, exec, noctalia msg screenshot-annotate
+
             bind = $mainMod, left, movefocus, l
             bind = $mainMod, right, movefocus, r
             bind = $mainMod, up, movefocus, u
@@ -231,10 +235,10 @@
             bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
             bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
-            bindl = , XF86AudioNext, exec, playerctl next
-            bindl = , XF86AudioPause, exec, playerctl play-pause
-            bindl = , XF86AudioPlay, exec, playerctl play-pause
-            bindl = , XF86AudioPrev, exec, playerctl previous
+            bindl = , XF86AudioNext, exec, noctalia msg media next
+            bindl = , XF86AudioPause, exec, noctalia msg media toggle
+            bindl = , XF86AudioPlay, exec, noctalia msg media toggle
+            bindl = , XF86AudioPrev, exec, noctalia msg media previous
 
             bindm = $mainMod, mouse:272, movewindow
             bindm = $mainMod, mouse:273, resizewindow
