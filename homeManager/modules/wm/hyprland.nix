@@ -256,6 +256,11 @@
             bindm = $mainMod, mouse:272, movewindow
             bindm = $mainMod, mouse:273, resizewindow
 
+            # --- Touchpad gestures ---
+            gesture = 3, horizontal, workspace
+            gesture = 4, up,         fullscreen
+            gesture = 4, down,       fullscreen
+
 
             ##############################
             ### WINDOWS AND WORKSPACES ###

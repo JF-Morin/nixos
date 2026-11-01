@@ -108,6 +108,10 @@ row "${SUP} + drag LMB"                     "Move window"
 row "${SUP} + drag RMB"                     "Resize window"
 row "${SUP} + scroll"                       "Switch workspace"
 
+section "  Touchpad Gestures"
+row "3 fingers swipe left / right"         "Switch workspace"
+row "4 fingers swipe up / down"            "Toggle fullscreen"
+
 section "${ICO_CAMERA}  Screenshots"
 row "Print"                                 "Region screenshot"
 row "${SFT} + Print"                        "Fullscreen screenshot"
