@@ -2,56 +2,25 @@
 
 function M.setup()
   require('base16-colorscheme').setup({
-    base00 = '#1e2127',
-    base01 = '#282c34',
-    base02 = '#313640',
-    base03 = '#616b7f',
-    base04 = '#61afef',
-    base05 = '#cdd4e1',
-    base06 = '#cdd4e1',
-    base07 = '#cdd4e1',
-    base08 = '#e06c75',
+    base00 = '#22262c',
+    base01 = '#21252b',
+    base02 = '#282c34',
+    base03 = '#666e7e',
+    base04 = '#78c4ce',
+    base05 = '#c9ccd3',
+    base06 = '#c9ccd3',
+    base07 = '#c9ccd3',
+    base08 = '#e27881',
     base09 = '#98c379',
-    base0A = '#c678dd',
-    base0B = '#61afef',
-    base0C = '#b9e996',
-    base0D = '#8bc4f3',
-    base0E = '#d696e9',
-    base0F = '#e7bef4',
+    base0A = '#eac786',
+    base0B = '#62bac6',
+    base0C = '#16565f',
+    base0D = '#3f6920',
+    base0E = '#b0770e',
+    base0F = '#daeff1',
   })
-
-  local hi = function(group, opts)
-    vim.api.nvim_set_hl(0, group, opts)
-  end
-
-  -- telescope.nvim
-  hi('TelescopeNormal',         { fg = '#cdd4e1',          bg = '#1e2127' })
-  hi('TelescopeBorder',         { fg = '#616b7f',             bg = '#1e2127' })
-  hi('TelescopePromptNormal',   { fg = '#cdd4e1',          bg = '#1e2127' })
-  hi('TelescopePromptBorder',   { fg = '#616b7f',             bg = '#1e2127' })
-  hi('TelescopePromptPrefix',   { fg = '#61afef',             bg = '#1e2127' })
-  hi('TelescopePromptCounter',  { fg = '#61afef',  bg = '#1e2127' })
-  hi('TelescopePromptTitle',    { fg = '#1e2127',             bg = '#61afef' })
-  hi('TelescopePreviewTitle',   { fg = '#1e2127',             bg = '#c678dd' })
-  hi('TelescopeResultsTitle',   { fg = '#1e2127',             bg = '#98c379' })
-  hi('TelescopeSelection',      { fg = '#cdd4e1',          bg = '#313640' })
-  hi('TelescopeSelectionCaret', { fg = '#61afef',             bg = '#313640' })
-  hi('TelescopeMatching',       { fg = '#61afef',             bold = true })
-
-  -- mini.pick
-  hi('MiniPickNormal',         { fg = '#cdd4e1',          bg = '#1e2127' })
-  hi('MiniPickBorder',         { fg = '#616b7f',             bg = '#1e2127' })
-  hi('MiniPickPrompt',   { fg = '#cdd4e1',          bg = '#1e2127' })
-  hi('MiniPickPromptPrefix',   { fg = '#61afef',             bg = '#1e2127' })
-  hi('MiniPickBorderText',    { fg = '#1e2127',             bg = '#61afef' })
-  hi('MiniPickMatchCurrent',      { fg = '#cdd4e1',          bg = '#313640' })
-  hi('MiniPickPromptCaret', { fg = '#61afef',             bg = '#313640' })
-  hi('MiniPickMatchRanges',       { fg = '#61afef',             bold = true })
 end
 
--- Register a signal handler for SIGUSR1 (matugen updates).
--- The handler re-requires this module, which re-runs the code below, so the
--- previous handle is stopped first; otherwise handlers double on every signal.
 if _G.__matugen_signal then
   _G.__matugen_signal:stop()
   _G.__matugen_signal:close()

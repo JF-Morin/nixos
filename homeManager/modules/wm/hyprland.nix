@@ -35,6 +35,7 @@
             $browser = zen
             $lock = noctalia msg session lock
             $script_switch_audio_sink = $HOME/Projects/nixos/scripts/switch_audio_sink.sh
+            $script_toggle_cheatsheet = $HOME/Projects/nixos/scripts/toggle_cheatsheet.sh
 
 
             #################
@@ -154,50 +155,29 @@
             ###################
             $mainMod = SUPER
 
+            # --- Launch ---
+            bind = $mainMod SHIFT, slash, exec, [float;center;pin;size 60% 65%] $script_toggle_cheatsheet
             bind = $mainMod, ESCAPE, exec, $session
-            bind = $mainMod, Q, killactive,
             bind = $mainMod, SPACE, exec, $launcher
-            bind = $mainMod, C, exec, $control_center
-            bind = $mainMod, B, exec, $browser
             bind = $mainMod, T, exec, $terminal
-            bind = $mainMod, H, exec, $terminal -e herdr
-            bind = $mainMod, Y, exec, $terminal -e yazi
+            bind = $mainMod, B, exec, $browser
             bind = $mainMod, E, exec, $fileManager
-            bind = $mainMod, F, togglefloating,
-            bind = $mainMod, P, pseudo,
+            bind = $mainMod, Y, exec, $terminal -e yazi
+            bind = $mainMod, R, exec, $terminal -e herdr
+            bind = $mainMod, C, exec, $control_center
+            bind = $mainMod, A, exec, $script_switch_audio_sink && noctalia msg panel-toggle jf/audio-switcher:panel
             bind = $mainMod, L, exec, $lock
 
+            # --- Screenshots ---
             bind = , Print, exec, noctalia msg screenshot-region
             bind = SHIFT, Print, exec, noctalia msg screenshot-fullscreen
             bind = CTRL, Print, exec, noctalia msg screenshot-annotate
 
-            bind = $mainMod, left, movefocus, l
-            bind = $mainMod, right, movefocus, r
-            bind = $mainMod, up, movefocus, u
-            bind = $mainMod, down, movefocus, d
-
-            bind = $mainMod CTRL, left, movewindow, l
-            bind = $mainMod CTRL, right, movewindow, r
-            bind = $mainMod CTRL, up, movewindow, u
-            bind = $mainMod CTRL, down, movewindow, d
-            bind = $mainMod CTRL, h, movewindow, l
-            bind = $mainMod CTRL, l, movewindow, r
-            bind = $mainMod CTRL, k, movewindow, u
-            bind = $mainMod CTRL, j, movewindow, d
-
-            binde = $mainMod ALT, right, resizeactive, 10 0
-            binde = $mainMod ALT, left, resizeactive, -10 0
-            binde = $mainMod ALT, up, resizeactive, 0 -10
-            binde = $mainMod ALT, down, resizeactive, 0 10
-            binde = $mainMod ALT, l, resizeactive, 10 0
-            binde = $mainMod ALT, h, resizeactive, -10 0
-            binde = $mainMod ALT, k, resizeactive, 0 -10
-            binde = $mainMod ALT, j, resizeactive, 0 10
-
-            bind = CTRL ALT, left, workspace, -1
-            bind = CTRL ALT, right, workspace, +1
-            bind = CTRL ALT, h, workspace, -1
-            bind = CTRL ALT, l, workspace, +1
+            # --- Workspaces: Super = go to ---
+            bind = $mainMod, h, workspace, -1
+            bind = $mainMod, l, workspace, +1
+            bind = $mainMod, left, workspace, -1
+            bind = $mainMod, right, workspace, +1
             bind = $mainMod, 1, workspace, 1
             bind = $mainMod, 2, workspace, 2
             bind = $mainMod, 3, workspace, 3
@@ -208,7 +188,14 @@
             bind = $mainMod, 8, workspace, 8
             bind = $mainMod, 9, workspace, 9
             bind = $mainMod, 0, workspace, 10
+            bind = $mainMod, S, togglespecialworkspace, magic
+            bind = $mainMod, mouse_down, workspace, e+1
+            bind = $mainMod, mouse_up, workspace, e-1
 
+            # --- Super+Shift = shift window to workspace ---
+            bind = $mainMod SHIFT, Q, killactive,
+            bind = $mainMod SHIFT, h, movetoworkspace, -1
+            bind = $mainMod SHIFT, l, movetoworkspace, +1
             bind = $mainMod SHIFT, left, movetoworkspace, -1
             bind = $mainMod SHIFT, right, movetoworkspace, +1
             bind = $mainMod SHIFT, 1, movetoworkspace, 1
@@ -221,35 +208,59 @@
             bind = $mainMod SHIFT, 8, movetoworkspace, 8
             bind = $mainMod SHIFT, 9, movetoworkspace, 9
             bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-            bind = $mainMod, S, togglespecialworkspace, magic
             bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 
-            bind = $mainMod, mouse_down, workspace, e+1
-            bind = $mainMod, mouse_up, workspace, e-1
+            # --- Super+Ctrl = control focus ---
+            bind = $mainMod CTRL, h, movefocus, l
+            bind = $mainMod CTRL, l, movefocus, r
+            bind = $mainMod CTRL, k, movefocus, u
+            bind = $mainMod CTRL, j, movefocus, d
+            bind = $mainMod CTRL, left, movefocus, l
+            bind = $mainMod CTRL, right, movefocus, r
+            bind = $mainMod CTRL, up, movefocus, u
+            bind = $mainMod CTRL, down, movefocus, d
 
-            bindel = ,XF86MonBrightnessUp, exec, brightnessctl s 10%+
-            bindel = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
-            bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-            bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-            bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-            bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+            # --- Super+Alt = alter (resize) ---
+            binde = $mainMod ALT, h, resizeactive, -10 0
+            binde = $mainMod ALT, l, resizeactive, 10 0
+            binde = $mainMod ALT, k, resizeactive, 0 -10
+            binde = $mainMod ALT, j, resizeactive, 0 10
+            binde = $mainMod ALT, left, resizeactive, -10 0
+            binde = $mainMod ALT, right, resizeactive, 10 0
+            binde = $mainMod ALT, up, resizeactive, 0 -10
+            binde = $mainMod ALT, down, resizeactive, 0 10
 
+            # --- Super+Shift+Alt = shift window within layout ---
+            bind = $mainMod SHIFT ALT, h, movewindow, l
+            bind = $mainMod SHIFT ALT, l, movewindow, r
+            bind = $mainMod SHIFT ALT, k, movewindow, u
+            bind = $mainMod SHIFT ALT, j, movewindow, d
+            bind = $mainMod SHIFT ALT, left, movewindow, l
+            bind = $mainMod SHIFT ALT, right, movewindow, r
+            bind = $mainMod SHIFT ALT, up, movewindow, u
+            bind = $mainMod SHIFT ALT, down, movewindow, d
+
+            # --- Media & hardware ---
+            bindel = , XF86MonBrightnessUp, exec, brightnessctl s 10%+
+            bindel = , XF86MonBrightnessDown, exec, brightnessctl s 10%-
+            bindel = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+            bindel = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+            bindel = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+            bindel = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
             bindl = , XF86AudioNext, exec, noctalia msg media next
             bindl = , XF86AudioPause, exec, noctalia msg media toggle
             bindl = , XF86AudioPlay, exec, noctalia msg media toggle
             bindl = , XF86AudioPrev, exec, noctalia msg media previous
 
+            # --- Mouse ---
             bindm = $mainMod, mouse:272, movewindow
             bindm = $mainMod, mouse:273, resizewindow
-
-            bind = $mainMod SHIFT, A, exec, $script_switch_audio_sink && noctalia msg panel-toggle jf/audio-switcher:panel
 
 
             ##############################
             ### WINDOWS AND WORKSPACES ###
             ##############################
-            source = ~/.config/hypr/noctalia.conf
+source = ~/.config/hypr/noctalia.conf
         '';
     };
 }
