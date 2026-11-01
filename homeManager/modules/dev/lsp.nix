@@ -3,7 +3,7 @@
 {
     home.packages = with pkgs; [
         bash-language-server                      # Bash
-        vscode-langservers-extracted              # HTML, CSS, JSON, Docker Compose
+        vscode-langservers-extracted              # HTML, CSS, JSON, Docker Compose (replaces vscode-json-languageserver)
         ccls                                      # C / C++
         docker-language-server                    # Dockerfile
         emmet-language-server                     # HTML / CSS (Emmet snippets)
@@ -22,7 +22,6 @@
         taplo                                     # TOML
         typescript-language-server                # TypeScript / JavaScript
         vscode-extensions.rust-lang.rust-analyzer # Rust
-        vscode-json-languageserver                # JSON
         yaml-language-server                      # YAML
         zls                                       # Zig
     ];

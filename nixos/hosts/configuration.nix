@@ -108,9 +108,25 @@
     # Enable flakes
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    # Automatic garbage collection: keep last 30 days, run weekly
+    nix.gc = {
+        automatic = true;
+        dates     = "weekly";
+        options   = "--delete-older-than 30d";
+    };
+
+    # Deduplicate identical files in the store
+    nix.settings.auto-optimise-store = true;
+
 
     # Flatpak
     services.flatpak.enable = true;
+
+    # AppImage
+    programs.appimage = {
+        enable = true;
+        binfmt = true;
+    };
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
