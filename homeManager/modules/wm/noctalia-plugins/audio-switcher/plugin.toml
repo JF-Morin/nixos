@@ -1,8 +1,9 @@
-id         = "jf/audio-switcher"
-name       = "Audio Switcher"
-version    = "1.0.0"
-plugin_api = 26
-author     = "jf"
+id           = "jf/audio-switcher"
+name         = "Audio Switcher"
+version      = "1.0.0"
+plugin_api   = 26
+author       = "jf"
+min_noctalia = "5.0.0"
 
 [[panel]]
 id     = "panel"

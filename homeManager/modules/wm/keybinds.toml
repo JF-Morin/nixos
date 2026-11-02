@@ -1,0 +1,219 @@
+# Hyprland keybindings — source of truth for the cheatsheet.
+# Icon tokens: {super} {shift} {ctrl} {alt}
+#              {terminal} {browser} {folder} {files} {chart} {gear}
+#              {audio} {lock} {help} {mouse} {camera} {music}
+
+[[section]]
+title = "{super}  Super — Launch & Navigate"
+
+[[section.bind]]
+key  = "{super} + Space"
+desc = "Launcher"
+
+[[section.bind]]
+key  = "{super} + Esc"
+desc = "Session menu"
+
+[[section.bind]]
+key  = "{super} + T"
+desc = "{terminal} Terminal"
+
+[[section.bind]]
+key  = "{super} + B"
+desc = "{browser} Browser"
+
+[[section.bind]]
+key  = "{super} + E"
+desc = "{folder} File manager"
+
+[[section.bind]]
+key  = "{super} + Y"
+desc = "{files} Yazi (TUI file browser)"
+
+[[section.bind]]
+key  = "{super} + R"
+desc = "{chart} Herdr (system resources)"
+
+[[section.bind]]
+key  = "{super} + C"
+desc = "{gear} Control center"
+
+[[section.bind]]
+key  = "{super} + A"
+desc = "{audio} Audio switcher"
+
+[[section.bind]]
+key  = "{super} + L"
+desc = "{lock} Lock screen"
+
+[[section.bind]]
+key  = "{super} + S"
+desc = "Toggle special workspace"
+
+[[section.bind]]
+key  = "{super} + ?"
+desc = "{help} Toggle this cheatsheet"
+
+[[section.bind]]
+key  = "{super} + h  or  ←"
+desc = "Previous workspace"
+
+[[section.bind]]
+key  = "{super} + l  or  →"
+desc = "Next workspace"
+
+[[section.bind]]
+key  = "{super} + 1 ... 0"
+desc = "Go to workspace N"
+
+
+[[section]]
+title = "{super} + {shift}  Super+Shift — Shift Window"
+
+[[section.bind]]
+key  = "{super} + {shift} + Q"
+desc = "Kill window"
+
+[[section.bind]]
+key  = "{super} + {shift} + h  or  ←"
+desc = "Move window to prev workspace"
+
+[[section.bind]]
+key  = "{super} + {shift} + l  or  →"
+desc = "Move window to next workspace"
+
+[[section.bind]]
+key  = "{super} + {shift} + S"
+desc = "Move to special workspace"
+
+[[section.bind]]
+key  = "{super} + {shift} + 1 ... 0"
+desc = "Move window to workspace N"
+
+
+[[section]]
+title = "{super} + {ctrl}  Super+Ctrl — Control Focus"
+
+[[section.bind]]
+key  = "{super} + {ctrl} + h  or  ←"
+desc = "Focus left"
+
+[[section.bind]]
+key  = "{super} + {ctrl} + l  or  →"
+desc = "Focus right"
+
+[[section.bind]]
+key  = "{super} + {ctrl} + k  or  ↑"
+desc = "Focus up"
+
+[[section.bind]]
+key  = "{super} + {ctrl} + j  or  ↓"
+desc = "Focus down"
+
+
+[[section]]
+title = "{super} + {alt}  Super+Alt — Alter (Resize)"
+
+[[section.bind]]
+key  = "{super} + {alt} + h  or  ←"
+desc = "Shrink width"
+
+[[section.bind]]
+key  = "{super} + {alt} + l  or  →"
+desc = "Grow width"
+
+[[section.bind]]
+key  = "{super} + {alt} + k  or  ↑"
+desc = "Shrink height"
+
+[[section.bind]]
+key  = "{super} + {alt} + j  or  ↓"
+desc = "Grow height"
+
+
+[[section]]
+title = "{super} + {shift} + {alt}  Super+Shift+Alt — Move in Layout"
+
+[[section.bind]]
+key  = "{super} + {shift} + {alt} + h  or  ←"
+desc = "Move window left in layout"
+
+[[section.bind]]
+key  = "{super} + {shift} + {alt} + l  or  →"
+desc = "Move window right in layout"
+
+[[section.bind]]
+key  = "{super} + {shift} + {alt} + k  or  ↑"
+desc = "Move window up in layout"
+
+[[section.bind]]
+key  = "{super} + {shift} + {alt} + j  or  ↓"
+desc = "Move window down in layout"
+
+
+[[section]]
+title = "{mouse}  Mouse  (hold Super)"
+
+[[section.bind]]
+key  = "{super} + drag LMB"
+desc = "Move window"
+
+[[section.bind]]
+key  = "{super} + drag RMB"
+desc = "Resize window"
+
+[[section.bind]]
+key  = "{super} + scroll"
+desc = "Switch workspace"
+
+
+[[section]]
+title = "  Touchpad Gestures"
+
+[[section.bind]]
+key  = "3 fingers swipe left / right"
+desc = "Switch workspace"
+
+[[section.bind]]
+key  = "4 fingers swipe up / down"
+desc = "Toggle fullscreen"
+
+
+[[section]]
+title = "{camera}  Screenshots"
+
+[[section.bind]]
+key  = "Print"
+desc = "Region screenshot"
+
+[[section.bind]]
+key  = "{shift} + Print"
+desc = "Fullscreen screenshot"
+
+[[section.bind]]
+key  = "{ctrl} + Print"
+desc = "Annotate screenshot"
+
+
+[[section]]
+title = "{music}  Media & Hardware"
+
+[[section.bind]]
+key  = "Volume Up / Down"
+desc = "+/- 5% volume"
+
+[[section.bind]]
+key  = "Mute / Mic Mute"
+desc = "Toggle mute"
+
+[[section.bind]]
+key  = "Play / Pause"
+desc = "Toggle playback"
+
+[[section.bind]]
+key  = "Next / Prev"
+desc = "Next / previous track"
+
+[[section.bind]]
+key  = "Brightness Up / Down"
+desc = "+/- 10% brightness"

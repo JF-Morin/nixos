@@ -1,127 +1,86 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
+import sys
+from pathlib import Path
 
-R=$'\033[0m'
-B=$'\033[1m'
-D=$'\033[2m'
-CYN=$'\033[38;5;81m'
-YLW=$'\033[38;5;214m'
-GRN=$'\033[38;5;114m'
-GRY=$'\033[38;5;245m'
+try:
+    import tomllib
+except ImportError:
+    print("Error: requires Python 3.11+", file=sys.stderr)
+    sys.exit(1)
 
-# Modifier icons — standard Unicode (always renders)
-SFT='⇧'
-CTL='⌃'
-ALT='⌥'
+TOML = Path.home() / "Projects/nixos/homeManager/modules/wm/keybinds.toml"
 
-# Key icons — Nerd Fonts BMP range (U+F000–U+F2E0, Font Awesome)
-SUP=$''    # nf-fa-windows
-ICO_TERM=$''   # nf-fa-terminal
-ICO_BROWSER=$'' # nf-fa-globe
-ICO_FOLDER=$''  # nf-fa-folder
-ICO_FILES=$''   # nf-fa-file
-ICO_CHART=$''   # nf-fa-bar-chart  (system resources)
-ICO_GEAR=$''    # nf-fa-gear       (control center)
-ICO_AUDIO=$''   # nf-fa-volume-up
-ICO_LOCK=$''    # nf-fa-lock
-ICO_HELP=$''    # nf-fa-question
-ICO_MOUSE=$''   # nf-fa-mouse-pointer
-ICO_CAMERA=$''  # nf-fa-camera
-ICO_MUSIC=$''   # nf-fa-music
-
-PAD=30
-
-# Compensates printf "%-Ns" for multi-byte / wide chars so descriptions align.
-overhead() {
-    printf '%s' "$1" | python3 -c "
-import sys, unicodedata
-s = sys.stdin.read()
-blen = len(s.encode('utf-8'))
-dwidth = sum(2 if unicodedata.east_asian_width(c) in ('W','F') else 1 for c in s)
-print(blen - dwidth)
-"
+ICONS = {
+    "super":    "",  # nf-fa-windows
+    "shift":    "⇧",
+    "ctrl":     "⌃",
+    "alt":      "⌥",
+    "terminal": "",  # nf-fa-terminal
+    "browser":  "",  # nf-fa-globe
+    "folder":   "",  # nf-fa-folder
+    "files":    "",  # nf-fa-file
+    "chart":    "",  # nf-fa-bar-chart
+    "gear":     "",  # nf-fa-gear
+    "audio":    "",  # nf-fa-volume-up
+    "lock":     "",  # nf-fa-lock
+    "help":     "",  # nf-fa-question
+    "mouse":    "",  # nf-fa-mouse-pointer
+    "camera":   "",  # nf-fa-camera
+    "music":    "",  # nf-fa-music
 }
 
-section() {
-    echo ""
-    printf "  ${B}${YLW}%s${R}\n" "$1"
-    printf "  ${D}${GRY}"
-    printf '%.0s─' $(seq 1 66)
-    printf "${R}\n"
-}
+R   = "\033[0m"
+B   = "\033[1m"
+D   = "\033[2m"
+CYN = "\033[38;5;81m"
+YLW = "\033[38;5;214m"
+GRN = "\033[38;5;114m"
+GRY = "\033[38;5;245m"
 
-row() {
-    local keys="$1"
-    local desc="$2"
-    local adj=$((PAD + $(overhead "$keys")))
-    printf "  ${CYN}%-${adj}s${R}  ${GRN}%s${R}\n" "$keys" "$desc"
-}
+PAD = 30
 
-echo ""
-printf "  ${B}┌──────────────────────────────────────────────────────────────┐${R}\n"
-printf "  ${B}│                    HYPRLAND  KEYBINDINGS                     │${R}\n"
-printf "  ${B}└──────────────────────────────────────────────────────────────┘${R}\n"
+def expand(s: str) -> str:
+    for name, icon in ICONS.items():
+        s = s.replace(f"{{{name}}}", icon)
+    return s
 
-section "${SUP}  Super — Launch & Navigate"
-row "${SUP} + Space"                        "Launcher"
-row "${SUP} + Esc"                          "Session menu"
-row "${SUP} + T"                            "${ICO_TERM} Terminal"
-row "${SUP} + B"                            "${ICO_BROWSER} Browser"
-row "${SUP} + E"                            "${ICO_FOLDER} File manager"
-row "${SUP} + Y"                            "${ICO_FILES} Yazi  (TUI file browser)"
-row "${SUP} + R"                            "${ICO_CHART} Herdr (system resources)"
-row "${SUP} + C"                            "${ICO_GEAR} Control center"
-row "${SUP} + A"                            "${ICO_AUDIO} Audio switcher"
-row "${SUP} + L"                            "${ICO_LOCK} Lock screen"
-row "${SUP} + S"                            "Toggle special workspace"
-row "${SUP} + ?"                            "${ICO_HELP} Toggle this cheatsheet"
-row "${SUP} + h  or  ←"                    "Previous workspace"
-row "${SUP} + l  or  →"                    "Next workspace"
-row "${SUP} + 1 ... 0"                      "Go to workspace N"
 
-section "${SUP} + ${SFT}  Super+Shift — Shift Window"
-row "${SUP} + ${SFT} + Q"                   "Kill window"
-row "${SUP} + ${SFT} + h  or  ←"           "Move window to prev workspace"
-row "${SUP} + ${SFT} + l  or  →"           "Move window to next workspace"
-row "${SUP} + ${SFT} + S"                   "Move to special workspace"
-row "${SUP} + ${SFT} + 1 ... 0"             "Move window to workspace N"
+def main_json() -> None:
+    import json
+    with open(TOML, "rb") as f:
+        data = tomllib.load(f)
+    result = {"section": []}
+    for section in data["section"]:
+        s = {"title": expand(section["title"]), "bind": []}
+        for bind in section.get("bind", []):
+            s["bind"].append({"key": expand(bind["key"]), "desc": expand(bind["desc"])})
+        result["section"].append(s)
+    sys.stdout.write(json.dumps(result, ensure_ascii=False))
 
-section "${SUP} + ${CTL}  Super+Ctrl — Control Focus"
-row "${SUP} + ${CTL} + h  or  ←"           "Focus left"
-row "${SUP} + ${CTL} + l  or  →"           "Focus right"
-row "${SUP} + ${CTL} + k  or  ↑"           "Focus up"
-row "${SUP} + ${CTL} + j  or  ↓"           "Focus down"
+def main() -> None:
+    with open(TOML, "rb") as f:
+        data = tomllib.load(f)
 
-section "${SUP} + ${ALT}  Super+Alt — Alter (Resize)"
-row "${SUP} + ${ALT} + h  or  ←"           "Shrink width"
-row "${SUP} + ${ALT} + l  or  →"           "Grow width"
-row "${SUP} + ${ALT} + k  or  ↑"           "Shrink height"
-row "${SUP} + ${ALT} + j  or  ↓"           "Grow height"
+    lines: list[str] = []
+    lines.append(f"\n  {B}┌──────────────────────────────────────────────────────────────┐{R}")
+    lines.append(f"  {B}│                    HYPRLAND  KEYBINDINGS                     │{R}")
+    lines.append(f"  {B}└──────────────────────────────────────────────────────────────┘{R}")
 
-section "${SUP} + ${SFT} + ${ALT}  Super+Shift+Alt — Move in Layout"
-row "${SUP} + ${SFT} + ${ALT} + h  or  ←"  "Move window left in layout"
-row "${SUP} + ${SFT} + ${ALT} + l  or  →"  "Move window right in layout"
-row "${SUP} + ${SFT} + ${ALT} + k  or  ↑"  "Move window up in layout"
-row "${SUP} + ${SFT} + ${ALT} + j  or  ↓"  "Move window down in layout"
+    for section in data["section"]:
+        t = expand(section["title"])
+        lines.append(f"\n  {B}{YLW}{t}{R}")
+        lines.append(f"  {D}{GRY}{'─' * 66}{R}")
+        for bind in section.get("bind", []):
+            k = expand(bind["key"])
+            d = expand(bind["desc"])
+            lines.append(f"  {CYN}{k:<{PAD}}{R}  {GRN}{d}{R}")
 
-section "${ICO_MOUSE}  Mouse  (hold Super)"
-row "${SUP} + drag LMB"                     "Move window"
-row "${SUP} + drag RMB"                     "Resize window"
-row "${SUP} + scroll"                       "Switch workspace"
+    lines.append("")
+    sys.stdout.write("\n".join(lines) + "\n")
+    sys.stdout.flush()
 
-section "  Touchpad Gestures"
-row "3 fingers swipe left / right"         "Switch workspace"
-row "4 fingers swipe up / down"            "Toggle fullscreen"
-
-section "${ICO_CAMERA}  Screenshots"
-row "Print"                                 "Region screenshot"
-row "${SFT} + Print"                        "Fullscreen screenshot"
-row "${CTL} + Print"                        "Annotate screenshot"
-
-section "${ICO_MUSIC}  Media & Hardware"
-row "Volume Up / Down"                      "+/- 5% volume"
-row "Mute / Mic Mute"                      "Toggle mute"
-row "Play / Pause"                          "Toggle playback"
-row "Next / Prev"                           "Next / previous track"
-row "Brightness Up / Down"                 "+/- 10% brightness"
-
-echo ""
+if __name__ == "__main__":
+    if "--json" in sys.argv:
+        main_json()
+    else:
+        main()

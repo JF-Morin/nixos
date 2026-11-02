@@ -13,12 +13,19 @@ in
   home.file.".config/noctalia/templates/neovim.tmpl" = {
     source = ./noctalia-templates/neovim.tmpl;
   };
+  home.file.".config/noctalia/templates/ghostty.tmpl" = {
+    source = ./noctalia-templates/ghostty.tmpl;
+  };
 
   # Register templates in Noctalia's config so templates-apply knows about them
   home.file.".config/noctalia/templates.toml".text = ''
     [theme.templates.user.neovim]
     input_path  = "$XDG_CONFIG_HOME/noctalia/templates/neovim.tmpl"
     output_path = "$XDG_CONFIG_HOME/nvim/lua/matugen.lua"
+
+    [theme.templates.user.ghostty]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/ghostty.tmpl"
+    output_path = "$XDG_CONFIG_HOME/ghostty/themes/noctalia"
   '';
 
   # Service: applies all templates and syncs greeter when Noctalia theme changes

@@ -13,6 +13,19 @@
         systemd.enable = false;
     };
 
+    home.activation.cheatsheetReminder = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        HASH_FILE="$HOME/.local/state/hyprland-nix.hash"
+        HYPRLAND_NIX="$HOME/Projects/nixos/homeManager/modules/wm/hyprland.nix"
+        CURRENT_HASH=$(${pkgs.coreutils}/bin/sha256sum "$HYPRLAND_NIX" | ${pkgs.coreutils}/bin/cut -d' ' -f1)
+        STORED_HASH=$(cat "$HASH_FILE" 2>/dev/null || true)
+
+        if [ "$CURRENT_HASH" != "$STORED_HASH" ]; then
+            printf "\n  \033[1;33m>> hyprland.nix changed — if you updated keybinds, ask Claude to update homeManager/modules/wm/keybinds.toml\033[0m\n\n"
+            mkdir -p "$(dirname "$HASH_FILE")"
+            echo "$CURRENT_HASH" > "$HASH_FILE"
+        fi
+    '';
+
     xdg.configFile."hypr/hyprland.conf" = {
         force = true;
         text = ''
@@ -35,7 +48,7 @@
             $browser = zen
             $lock = noctalia msg session lock
             $script_switch_audio_sink = $HOME/Projects/nixos/scripts/switch_audio_sink.sh
-            $script_toggle_cheatsheet = $HOME/Projects/nixos/scripts/toggle_cheatsheet.sh
+            $cheatsheet = $HOME/Projects/nixos/scripts/toggle_cheatsheet.sh
 
 
             #################
@@ -156,7 +169,7 @@
             $mainMod = SUPER
 
             # --- Launch ---
-            bind = $mainMod SHIFT, slash, exec, [float;center;pin;size 60% 65%] $script_toggle_cheatsheet
+            bind = $mainMod SHIFT, slash, exec, $cheatsheet
             bind = $mainMod, ESCAPE, exec, $session
             bind = $mainMod, SPACE, exec, $launcher
             bind = $mainMod, T, exec, $terminal
