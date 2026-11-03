@@ -16,6 +16,12 @@ in
   home.file.".config/noctalia/templates/ghostty.tmpl" = {
     source = ./noctalia-templates/ghostty.tmpl;
   };
+  home.file.".config/noctalia/templates/zen-userChrome.tmpl" = {
+    source = ./noctalia-templates/zen-userChrome.tmpl;
+  };
+  home.file.".config/noctalia/templates/zen-userContent.tmpl" = {
+    source = ./noctalia-templates/zen-userContent.tmpl;
+  };
 
   # Register templates in Noctalia's config so templates-apply knows about them
   home.file.".config/noctalia/templates.toml".text = ''
@@ -26,6 +32,14 @@ in
     [theme.templates.user.ghostty]
     input_path  = "$XDG_CONFIG_HOME/noctalia/templates/ghostty.tmpl"
     output_path = "$XDG_CONFIG_HOME/ghostty/themes/noctalia"
+
+    [theme.templates.user.zen-userchrome]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/zen-userChrome.tmpl"
+    output_path = "$HOME/.cache/noctalia/zen-browser/zen-userChrome.css"
+
+    [theme.templates.user.zen-usercontent]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/zen-userContent.tmpl"
+    output_path = "$HOME/.cache/noctalia/zen-browser/zen-userContent.css"
   '';
 
   # Service: applies all templates and syncs greeter when Noctalia theme changes
