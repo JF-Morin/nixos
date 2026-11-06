@@ -1,6 +1,7 @@
 return {
     "folke/snacks.nvim",
     priority = 1000,
+    lazy = false,
     keys = {
         -- Top
         { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
@@ -42,7 +43,7 @@ return {
     },
 
     opts = {
-        dashboard = { enabled = true },
+        dashboard = { enabled = false },
         lazygit = {},
         image = {
             enabled = true

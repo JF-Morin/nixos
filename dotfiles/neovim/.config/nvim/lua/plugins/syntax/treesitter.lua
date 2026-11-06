@@ -1,48 +1,13 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
-    branch = "master",
-    build = ':TSUpdate',
+    -- master branch is archived and incompatible with Neovim 0.12
+    branch = "main",
+    init = function()
+        -- Nix-compiled parsers take precedence over any lazily compiled ones.
+        vim.opt.runtimepath:prepend(vim.fn.stdpath('data') .. '/nix-ts-parsers')
+    end,
     config = function()
-        require("nvim-treesitter.install").compilers = {'gcc'},
-        require'nvim-treesitter.configs'.setup {
-            ensure_installed = {
-                'bash',
-                'c',
-                'c_sharp',
-                'comment',
-                'cpp',
-                'css',
-                'csv',
-                'dart',
-                'dockerfile',
-                'go',
-                'html',
-                'http',
-                'javascript',
-                'json',
-                'lua',
-                'markdown',
-                'markdown_inline',
-                'nix',
-                'norg',
-                'python',
-                'regex',
-                'rust',
-                'scss',
-                'sql',
-                'svelte',
-                'tsx',
-                'typst',
-                'typescript',
-                'vue',
-                'xml',
-                'yaml',
-                'zig'
-            },
-            auto_install = true,
-            highlight = { enable = true },
-            indent = { enable = true },
-        }
+        require('nvim-treesitter').setup()
     end
 }

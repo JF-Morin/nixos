@@ -176,7 +176,7 @@
             bind = $mainMod, B, exec, $browser
             bind = $mainMod, E, exec, $fileManager
             bind = $mainMod, Y, exec, $terminal -e yazi
-            bind = $mainMod, R, exec, $terminal -e herdr
+            bind = $mainMod, R, exec, herdr-app
             bind = $mainMod, C, exec, $control_center
             bind = $mainMod, A, exec, $script_switch_audio_sink && noctalia msg panel-toggle jf/audio-switcher:panel
             bind = $mainMod, L, exec, $lock

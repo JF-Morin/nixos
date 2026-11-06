@@ -22,6 +22,9 @@ in
   home.file.".config/noctalia/templates/zen-userContent.tmpl" = {
     source = ./noctalia-templates/zen-userContent.tmpl;
   };
+  home.file.".config/noctalia/templates/herdr-app.tmpl" = {
+    source = ./noctalia-templates/herdr-app.tmpl;
+  };
 
   # Register templates in Noctalia's config so templates-apply knows about them
   home.file.".config/noctalia/templates.toml".text = ''
@@ -40,6 +43,10 @@ in
     [theme.templates.user.zen-usercontent]
     input_path  = "$XDG_CONFIG_HOME/noctalia/templates/zen-userContent.tmpl"
     output_path = "$HOME/.cache/noctalia/zen-browser/zen-userContent.css"
+
+    [theme.templates.user.herdr-app]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/herdr-app.tmpl"
+    output_path = "$XDG_CONFIG_HOME/herdr-app/themes/noctalia.json"
   '';
 
   # Service: applies all templates and syncs greeter when Noctalia theme changes

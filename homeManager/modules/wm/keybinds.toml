@@ -32,7 +32,7 @@ desc = "{files} Yazi (TUI file browser)"
 
 [[section.bind]]
 key  = "{super} + R"
-desc = "{chart} Herdr (system resources)"
+desc = "{chart} Herdr"
 
 [[section.bind]]
 key  = "{super} + C"

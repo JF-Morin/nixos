@@ -1,8 +1,4 @@
-{ config, pkgs,nixpkgs-unstable, inputs, user, sysConfig, ... }:
-let
-  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-
-in 
+{ config, pkgs, inputs, user, sysConfig, ... }:
 
 {
     #################################################
@@ -39,7 +35,7 @@ in
         steam
         libreoffice
         kicad
-        #firefox
+        firefox
         blender
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         # Terminal
@@ -47,7 +43,6 @@ in
         lazygit # Git TUI
         #nerdfonts   # Fonts
         font-awesome # Fonts
-        pkgs-unstable.herdr
         bat # Like cat, but better
         #zsh # Shell
         fastfetch # System info
