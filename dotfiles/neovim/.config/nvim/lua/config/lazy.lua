@@ -31,6 +31,7 @@ require('lazy').setup({
         { import = "plugins.editing" },
         { import = "plugins.navigation" },
         { import = "plugins.utils" },
+        { import = "plugins.ai" },
     },
     checker = {
 	    enable = true

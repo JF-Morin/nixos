@@ -23,6 +23,7 @@ return {
       { "<leader>w",  group = "Window" },
       { "<leader>d",  group = "Diagnostics" },
       { "<leader>t",  group = "Terminal" },
+      { "<leader>a",  group = "AI" },
     },
   },
   keys = {
