@@ -30,6 +30,12 @@
             url = "github:noctalia-dev/noctalia-greeter";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        # Spicetify
+        spicetify-nix = {
+            url = "github:Gerg-L/spicetify-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, ... } @ inputs:
@@ -98,8 +104,15 @@
                                     value = {config, pkgs, lib, ...}:{
                                         imports = [
                                             homeFilePath
+                                            inputs.spicetify-nix.homeManagerModules.default
                                         ];
-                                        _module.args = {inherit user sysConfig inputs;};
+                                        _module.args = {
+                                            inherit user sysConfig inputs;
+                                            pkgs-unstable = import nixpkgs-unstable {
+                                                system = sysConfig.system.arch;
+                                                config.allowUnfree = true;
+                                            };
+                                        };
                                     };
                                 }
                             ) sysConfig.users);

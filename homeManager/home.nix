@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, user, sysConfig, ... }:
+{ config, pkgs, pkgs-unstable, inputs, user, sysConfig, ... }:
 
 {
     #################################################
@@ -31,20 +31,19 @@
         inkscape-with-extensions
         brave
         discord
-        spotify
         steam
         libreoffice
         kicad
         firefox
         blender
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+
         # Terminal
         yazi # Terminal file eplorer
         lazygit # Git TUI
         #nerdfonts   # Fonts
         font-awesome # Fonts
         bat # Like cat, but better
-        #zsh # Shell
         fastfetch # System info
         zoxide # Smart 'cd' replacement
         ripgrep-all # Ripgrep, with PDF, doc, zip etc
@@ -68,7 +67,7 @@
         webp-pixbuf-loader
 
         # AI tool's
-        claude-code
+        pkgs-unstable.claude-code
 
         # Hyprland
         libnotify # for notifications (notify-send)
@@ -148,6 +147,39 @@
     home.sessionVariables = {
         # EDITOR = "emacs";
     };
+
+    programs.spicetify = {
+        enable = true;
+        enabledCustomApps = with inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system}.apps; [
+            marketplace
+            lyricsPlus
+            newReleases
+        ];
+        enabledExtensions = with inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system}.extensions; [
+            shuffle
+            hidePodcasts
+            adblock
+            fullAppDisplay
+            popupLyrics
+            beautifulLyrics
+            lastfm
+            trashbin
+            keyboardShortcut
+            coverAmbience
+            volumePercentage
+        ];
+    };
+
+    # Patch herdr-core's claude agent-detection to also match the Nix-wrapped
+    # binary name (.claude-wrapped). herdr-core uses the kernel process name
+    # for detection, but Nix's makeCWrapper renames the actual binary to
+    # .claude-wrapped rather than claude.
+    home.activation.fixHerdrClaudeDetection = config.lib.dag.entryAfter ["writeBoundary"] ''
+      _claude_toml="$HOME/.local/state/herdr/agent-detection/remote/claude.toml"
+      if [ -f "$_claude_toml" ] && ! ${pkgs.gnugrep}/bin/grep -q '".claude-wrapped"' "$_claude_toml"; then
+        ${pkgs.gnused}/bin/sed -i 's/^aliases = \[/aliases = [".claude-wrapped", /' "$_claude_toml"
+      fi
+    '';
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
