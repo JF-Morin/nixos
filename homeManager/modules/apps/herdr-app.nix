@@ -99,9 +99,30 @@ let
     '';
   };
 
+  # Desktop notifications (Noctalia) when an agent is blocked or finishes
+  # while the Herdr window isn't focused. See herdr-notify/src/main.rs.
+  herdr-notify = pkgs.callPackage ./herdr-notify { };
+
 in {
   home.packages = [
     herdr-app
     herdr-core
   ];
+
+  systemd.user.services.herdr-notify = {
+    # default.target, not graphical-session.target: this session never
+    # activates the graphical targets. The program finds Hyprland itself.
+    Unit.Description = "Desktop notifications for herdr agents";
+    Service = {
+      ExecStart = "${herdr-notify}/bin/herdr-notify";
+      Environment = [
+        "PATH=${lib.makeBinPath [ herdr-app herdr-core pkgs.libnotify pkgs.pipewire ]}:/run/current-system/sw/bin"
+        "HERDR_NOTIFY_SOUNDS=${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo"
+        "HERDR_NOTIFY_ICON=${herdr-app}/share/icons/hicolor/scalable/apps/herdr-app.svg"
+      ];
+      Restart = "always";
+      RestartSec = "3s";
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
 }

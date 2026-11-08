@@ -13,5 +13,6 @@
         nodejs_26
         gcc
         gnumake
+        openssl
     ];
 }
