@@ -82,11 +82,21 @@
         # Packages for "desktop"
         ++ pkgs.lib.optionals (sysConfig.system.name == "desktop")[
             freecad-wayland
+            # 3D printer slicer; renders through Mesa Zink to avoid a blank 3D view on NVIDIA
+            (pkgs-unstable.bambu-studio.override { withNvidiaGLWorkaround = true; })
         ]
         # Packages for "laptop"
         ++ pkgs.lib.optionals (sysConfig.system.name == "laptop")[
             brightnessctl
+            bambu-studio # 3D printer slicer
         ];
+
+    # Automatic garbage collection of home-manager generations: keep last 30 days, run weekly
+    nix.gc = {
+        automatic = true;
+        dates     = "weekly";
+        options   = "--delete-older-than 30d";
+    };
 
     qt = {
         enable = true;
